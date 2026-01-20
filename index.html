@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Nhận Xét Học Sinh - Openland</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #2596be;
+            --primary-dark: #1c7795;
+            --secondary-color: #f0f8ff;
+            --text-color: #333;
+            --border-color: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Form nhập liệu bên trái */
+        .form-container {
+            flex: 1;
+            min-width: 350px;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(37, 150, 190, 0.2);
+        }
+
+        .competency-row {
+            background-color: var(--secondary-color);
+            border-radius: var(--radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .competency-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .competency-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .star {
+            font-size: 1.8rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffd700;
+        }
+
+        .suggest-btn {
+            background-color: #f0f8ff;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: var(--radius);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .suggest-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .summary-box {
+            background-color: #f9f9f9;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px dashed var(--primary-color);
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .total-stars {
+            color: var(--primary-dark);
+        }
+
+        .g-level {
+            color: #e67e22;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        /* Khung xem trước bên phải */
+        .preview-container {
+            flex: 1;
+            min-width: 350px;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .preview-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .preview-section {
+            margin-bottom: 20px;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .preview-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .preview-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .preview-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .teacher-signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .preview-container {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .student-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: 100%;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .form-container,
+            .action-buttons,
+            .toast {
+                display: none !important;
+            }
+            
+            .preview-container {
+                box-shadow: none;
+                padding: 20px;
+                width: 100%;
+                max-width: 100%;
+                min-width: 100%;
+                position: static;
+                max-height: none;
+                overflow: visible;
+            }
+            
+            .preview-title {
+                font-size: 1.8rem;
+                margin-top: 10px;
+            }
+            
+            .preview-table th {
+                background-color: #f0f0f0 !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form nhập liệu bên trái -->
+        <div class="form-container">
+            <h1>NHẬP THÔNG TIN NHẬN XÉT</h1>
+            
+            <!-- Thông tin học sinh -->
+            <div class="form-group">
+                <label for="studentName">Họ và tên học sinh:</label>
+                <input type="text" id="studentName" placeholder="Nhập họ tên học sinh">
+            </div>
+            
+            <div class="student-info-grid">
+                <div class="form-group">
+                    <label for="className">Lớp:</label>
+                    <input type="text" id="className" placeholder="Ví dụ: 10A1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="teacherName">Giáo viên:</label>
+                    <input type="text" id="teacherName" placeholder="Nhập tên giáo viên">
+                </div>
+                
+                <div class="form-group">
+                    <label for="teacherPhone">SĐT giáo viên:</label>
+                    <input type="text" id="teacherPhone" placeholder="Nhập số điện thoại">
+                </div>
+            </div>
+            
+            <!-- Đánh giá năng lực -->
+            <h2>ĐÁNH GIÁ NĂNG LỰC</h2>
+            
+            <!-- Grammar -->
+            <div class="competency-row" id="grammar-row">
+                <div class="competency-header">
+                    <span class="competency-name">Grammar</span>
+                </div>
+                <div class="star-rating" data-competency="grammar">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button class="suggest-btn" data-competency="grammar">Gợi ý nhận xét</button>
+                <label for="grammar-comment">Nhận xét chi tiết:</label>
+                <textarea id="grammar-comment" rows="3" placeholder="Nhận xét sẽ tự động điền khi chọn sao và bấm gợi ý..."></textarea>
+            </div>
+            
+            <!-- Vocabulary -->
+            <div class="competency-row" id="vocabulary-row">
+                <div class="competency-header">
+                    <span class="competency-name">Vocabulary</span>
+                </div>
+                <div class="star-rating" data-competency="vocabulary">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button class="suggest-btn" data-competency="vocabulary">Gợi ý nhận xét</button>
+                <label for="vocabulary-comment">Nhận xét chi tiết:</label>
+                <textarea id="vocabulary-comment" rows="3" placeholder="Nhận xét sẽ tự động điền khi chọn sao và bấm gợi ý..."></textarea>
+            </div>
+            
+            <!-- Communication -->
+            <div class="competency-row" id="communication-row">
+                <div class="competency-header">
+                    <span class="competency-name">Communication</span>
+                </div>
+                <div class="star-rating" data-competency="communication">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button class="suggest-btn" data-competency="communication">Gợi ý nhận xét</button>
+                <label for="communication-comment">Nhận xét chi tiết:</label>
+                <textarea id="communication-comment" rows="3" placeholder="Nhận xét sẽ tự động điền khi chọn sao và bấm gợi ý..."></textarea>
+            </div>
+            
+            <!-- Tổng kết -->
+            <div class="summary-box">
+                <div class="summary-stats">
+                    <span class="total-stars">Tổng sao: <span id="total-stars">0</span></span>
+                    <span class="g-level">Mức: <span id="g-level">G1</span></span>
+                </div>
+                
+                <label for="general-comment">NHẬN XÉT CHUNG CỦA GIÁO VIÊN:</label>
+                <textarea id="general-comment" rows="4" placeholder="Nhận xét chung về quá trình học tập..."></textarea>
+                <button class="suggest-btn" id="suggest-general-btn" style="margin-top: 10px;">Gợi ý nhận xét chung</button>
+            </div>
+            
+            <!-- Nút chức năng -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="reset-btn">Làm mới</button>
+                <button class="btn btn-success" id="copy-btn">Sao chép nội dung</button>
+                <button class="btn btn-secondary" id="print-btn">In phiếu</button>
+            </div>
+        </div>
+        
+        <!-- Khung xem trước bên phải -->
+        <div class="preview-container">
+            <div class="preview-title">PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP</div>
+            
+            <!-- Thông tin học sinh -->
+            <div class="preview-section">
+                <div class="student-info">
+                    <div>
+                        <strong>Họ và tên học sinh:</strong> 
+                        <span id="preview-studentName">___________________</span>
+                    </div>
+                    <div>
+                        <strong>Lớp:</strong> 
+                        <span id="preview-className">___________________</span>
+                    </div>
+                    <div>
+                        <strong>Giáo viên:</strong> 
+                        <span id="preview-teacherName">___________________</span>
+                    </div>
+                    <div>
+                        <strong>SĐT giáo viên:</strong> 
+                        <span id="preview-teacherPhone">___________________</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bảng đánh giá năng lực -->
+            <div class="preview-section">
+                <h3>ĐÁNH GIÁ NĂNG LỰC</h3>
+                <table class="preview-table">
+                    <thead>
+                        <tr>
+                            <th>Năng lực</th>
+                            <th>Mức đánh giá</th>
+                            <th>Nhận xét chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Grammar</td>
+                            <td id="preview-grammar-stars">☆☆☆☆☆</td>
+                            <td id="preview-grammar-comment">Chưa có nhận xét</td>
+                        </tr>
+                        <tr>
+                            <td>Vocabulary</td>
+                            <td id="preview-vocabulary-stars">☆☆☆☆☆</td>
+                            <td id="preview-vocabulary-comment">Chưa có nhận xét</td>
+                        </tr>
+                        <tr>
+                            <td>Communication</td>
+                            <td id="preview-communication-stars">☆☆☆☆☆</td>
+                            <td id="preview-communication-comment">Chưa có nhận xét</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 15px; font-weight: 600;">
+                    <span>Tổng sao: <span id="preview-total-stars">0</span></span>
+                    <span style="margin-left: 20px;">Mức: <span id="preview-g-level">G1</span></span>
+                </div>
+            </div>
+            
+            <!-- Nhận xét chung -->
+            <div class="preview-section">
+                <h3>NHẬN XÉT CHUNG CỦA GIÁO VIÊN</h3>
+                <div id="preview-general-comment" style="min-height: 80px; padding: 10px; border: 1px solid #eee; border-radius: 4px;">
+                    Chưa có nhận xét chung.
+                </div>
+            </div>
+            
+            <!-- Chữ ký -->
+            <div class="teacher-signature">
+                <div>Giáo viên ký tên:</div>
+                <div style="margin-top: 40px; font-weight: 600;">_________________________</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast thông báo -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ==================== KHO DỮ LIỆU NHẬN XÉT ====================
+        // Dữ liệu được chuyển đổi từ sheet DATA trong Excel
+        
+        // Ngân hàng nhận xét theo mức sao (1-5)
+        const commentBankByStars = {
+            1: {
+                grammar: [
+                    "Cần ôn lại kiến thức nền tảng và luyện tập thường xuyên hơn.",
+                    "Chưa nắm chắc nội dung đã học; cần thêm thời gian củng cố.",
+                    "Thường xuyên mắc lỗi cơ bản; cần kèm sát khi làm bài.",
+                    "Khả năng áp dụng kiến thức còn yếu; cần luyện theo hướng dẫn.",
+                    "Chưa đạt yêu cầu của khóa; nên bổ sung bài tập ở nhà."
+                ],
+                vocabulary: [
+                    "Cần củng cố vốn từ vựng cơ bản.",
+                    "Chưa nhớ được từ vựng đã học; cần ôn tập nhiều hơn.",
+                    "Phản xạ với từ vựng còn chậm; cần luyện tập thêm.",
+                    "Sử dụng từ vựng chưa chính xác; cần chú ý ngữ cảnh.",
+                    "Cần tăng cường học từ vựng mỗi ngày."
+                ],
+                communication: [
+                    "Cần cải thiện sự tập trung và tính kỷ luật trong giờ học.",
+                    "Còn ngại tham gia; nên tăng cường hoạt động luyện tập đơn giản.",
+                    "Chưa hình thành thói quen tự sửa lỗi; cần nhắc nhở thường xuyên.",
+                    "Cần học bổ trợ để theo kịp tiến độ lớp.",
+                    "Khuyến nghị ôn tập lại các chủ điểm cơ bản trước khi học nâng cao."
+                ]
+            },
+            2: {
+                grammar: [
+                    "Có cố gắng nhưng kiến thức chưa vững; cần luyện thêm.",
+                    "Nắm được một phần nội dung nhưng độ chính xác chưa ổn định.",
+                    "Còn phụ thuộc vào gợi ý; cần tăng tính chủ động.",
+                    "Thỉnh thoảng mắc lỗi cơ bản; cần ôn lại các điểm trọng tâm.",
+                    "Tiến bộ chậm; nên luyện tập đều đặn ở nhà."
+                ],
+                vocabulary: [
+                    "Đã hiểu bài nhưng vận dụng chưa linh hoạt.",
+                    "Cần luyện thêm dạng bài quen thuộc để giảm sai sót.",
+                    "Tham gia tương đối; nên tích cực phát biểu hơn.",
+                    "Cần tăng tốc độ làm bài và độ tập trung.",
+                    "Khuyến nghị làm thêm bài tập bổ trợ theo tuần."
+                ],
+                communication: [
+                    "Cần luyện thêm dạng bài quen thuộc để giảm sai sót.",
+                    "Tham gia tương đối; nên tích cực phát biểu hơn.",
+                    "Cần tăng tốc độ làm bài và độ tập trung.",
+                    "Khuyến nghị làm thêm bài tập bổ trợ theo tuần.",
+                    "Cần cải thiện khả năng phản xạ trong giao tiếp."
+                ]
+            },
+            3: {
+                grammar: [
+                    "Đáp ứng yêu cầu cơ bản của khóa học.",
+                    "Nắm được kiến thức trọng tâm và áp dụng ở mức ổn định.",
+                    "Có tiến bộ đều; cần luyện thêm để nâng độ chính xác.",
+                    "Hoàn thành tốt bài tập mức trung bình.",
+                    "Vận dụng được kiến thức trong đa số tình huống quen thuộc."
+                ],
+                vocabulary: [
+                    "Cần cải thiện một số lỗi nhỏ để đạt kết quả cao hơn.",
+                    "Tham gia học tập tương đối tích cực.",
+                    "Đã có nền tảng tốt để tiếp tục học lên.",
+                    "Cần duy trì nhịp độ học và ôn tập hiện tại.",
+                    "Khuyến khích luyện thêm để tăng sự tự tin."
+                ],
+                communication: [
+                    "Tham gia học tập tương đối tích cực.",
+                    "Đã có nền tảng tốt để tiếp tục học lên.",
+                    "Cần duy trì nhịp độ học và ôn tập hiện tại.",
+                    "Khuyến khích luyện thêm để tăng sự tự tin.",
+                    "Giao tiếp ở mức cơ bản; cần luyện thêm để tự tin hơn."
+                ]
+            },
+            4: {
+                grammar: [
+                    "Nắm vững hầu hết nội dung và vận dụng khá linh hoạt.",
+                    "Tiến bộ rõ rệt; làm bài tốt và ổn định.",
+                    "Thái độ học tập tích cực, chủ động trong giờ học.",
+                    "Áp dụng kiến thức hiệu quả, ít mắc lỗi.",
+                    "Có khả năng tự sửa lỗi khi được góp ý."
+                ],
+                vocabulary: [
+                    "Thực hiện tốt các dạng bài tập của khóa.",
+                    "Giao tiếp tự nhiên hơn; phản xạ tốt trong hoạt động lớp.",
+                    "Có nền tảng tốt để học nâng cao.",
+                    "Thường hoàn thành bài tập đúng hạn và chất lượng.",
+                    "Kết quả học tập tốt so với mặt bằng chung."
+                ],
+                communication: [
+                    "Giao tiếp tự nhiên hơn; phản xạ tốt trong hoạt động lớp.",
+                    "Có nền tảng tốt để học nâng cao.",
+                    "Thường hoàn thành bài tập đúng hạn và chất lượng.",
+                    "Kết quả học tập tốt so với mặt bằng chung.",
+                    "Tự tin hơn trong giao tiếp; phản xạ nhanh."
+                ]
+            },
+            5: {
+                grammar: [
+                    "Nắm vững và vận dụng xuất sắc kiến thức đã học.",
+                    "Tiến bộ vượt bậc; phản xạ nhanh và chính xác.",
+                    "Rất chủ động, tích cực và có tinh thần học tập tốt.",
+                    "Áp dụng linh hoạt; hiếm khi mắc lỗi.",
+                    "Thể hiện tư duy ngôn ngữ tốt và tự tin trong lớp."
+                ],
+                vocabulary: [
+                    "Luôn hoàn thành bài tập với chất lượng cao.",
+                    "Có khả năng hỗ trợ bạn khác và làm việc nhóm hiệu quả.",
+                    "Giao tiếp tự nhiên, diễn đạt rõ ràng và mạch lạc.",
+                    "Sẵn sàng học lên trình độ cao hơn.",
+                    "Kết quả học tập xuất sắc, vượt yêu cầu khóa học."
+                ],
+                communication: [
+                    "Có khả năng hỗ trợ bạn khác và làm việc nhóm hiệu quả.",
+                    "Giao tiếp tự nhiên, diễn đạt rõ ràng và mạch lạc.",
+                    "Sẵn sàng học lên trình độ cao hơn.",
+                    "Kết quả học tập xuất sắc, vượt yêu cầu khóa học.",
+                    "Giao tiếp xuất sắc, tự tin và lưu loát."
+                ]
+            }
+        };
+        
+        // Nhận xét theo mức tổng quát G1-G4
+        const generalLevelComments = {
+            "G1": [
+                "Cần củng cố nền tảng và ôn tập đều đặn hằng tuần.",
+                "Nên luyện thêm bài tập cơ bản để tăng độ chính xác.",
+                "Cần cải thiện sự tập trung và chủ động trong giờ học.",
+                "Khuyến nghị phụ huynh hỗ trợ lịch ôn tập tại nhà.",
+                "Nên luyện nghe – nói ở mức đơn giản mỗi ngày.",
+                "Cần tăng thói quen tự kiểm tra và sửa lỗi.",
+                "Nên học bổ trợ để theo kịp tiến độ chương trình.",
+                "Cần rèn kỹ năng làm bài theo hướng dẫn từng bước.",
+                "Khuyến khích đặt mục tiêu nhỏ và theo dõi tiến bộ.",
+                "Nếu có thể, nên học thêm buổi phụ đạo/ôn tập."
+            ],
+            "G2": [
+                "Học sinh có tiến bộ, cần luyện thêm để ổn định kết quả.",
+                "Nên tăng cường ôn tập để giảm lỗi ở các chủ điểm quen thuộc.",
+                "Khuyến khích chủ động phát biểu và tham gia hoạt động lớp.",
+                "Cần duy trì lịch luyện tập đều đặn ngoài giờ.",
+                "Nên luyện thêm bài tập theo chủ đề để vận dụng tốt hơn.",
+                "Khuyến khích tự sửa lỗi và ghi chú lỗi thường gặp.",
+                "Cần cải thiện tốc độ phản xạ và sự tự tin.",
+                "Có tiềm năng; cần kiên trì để bứt phá.",
+                "Nên đặt mục tiêu tuần và tự kiểm tra cuối tuần.",
+                "Tiếp tục cố gắng để đạt mức cao hơn."
+            ],
+            "G3": [
+                "Học sinh học tốt và có thái độ tích cực.",
+                "Nắm chắc nội dung; cần luyện thêm để tăng độ trôi chảy.",
+                "Khuyến khích mở rộng vốn từ theo chủ đề đã học.",
+                "Nên luyện thêm để tăng độ chính xác ở các chi tiết nhỏ.",
+                "Tiếp tục duy trì thói quen ôn tập đều đặn.",
+                "Có khả năng tự học tốt; nên làm thêm bài nâng cao vừa sức.",
+                "Khuyến khích tham gia nhiều hoạt động giao tiếp hơn.",
+                "Kết quả ổn định; tiếp tục phát huy.",
+                "Nên luyện nghe – nói thường xuyên để tăng phản xạ.",
+                "Sẵn sàng học lên cấp độ tiếp theo."
+            ],
+            "G4": [
+                "Học sinh đạt kết quả xuất sắc và rất chủ động.",
+                "Vận dụng linh hoạt; phản xạ tốt trong nhiều tình huống.",
+                "Có thái độ học tập rất tốt và tinh thần tự học cao.",
+                "Khuyến khích tham gia thêm hoạt động nâng cao để phát triển thêm.",
+                "Nên mở rộng kỹ năng diễn đạt và thuyết trình.",
+                "Tiếp tục phát huy để đạt thành tích cao hơn nữa.",
+                "Có nền tảng vững; phù hợp học nội dung nâng cao.",
+                "Khả năng giao tiếp tốt; nên luyện thêm để tăng độ tự nhiên.",
+                "Thể hiện sự tiến bộ vượt bậc trong khóa học.",
+                "Sẵn sàng cho khóa tiếp theo ở trình độ cao hơn."
+            ]
+        };
+        
+        // ==================== BIẾN TOÀN CỤC ====================
+        let ratings = {
+            grammar: 0,
+            vocabulary: 0,
+            communication: 0
+        };
+        
+        // ==================== HÀM TIỆN ÍCH ====================
+        
+        // Hiển thị thông báo toast
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') {
+                toast.style.backgroundColor = '#e74c3c';
+            } else if (type === 'warning') {
+                toast.style.backgroundColor = '#f39c12';
+            } else {
+                toast.style.backgroundColor = '#2ecc71';
+            }
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Chọn ngẫu nhiên phần tử từ mảng
+        function getRandomItems(arr, count = 2) {
+            const shuffled = [...arr].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        
+        // Tạo chuỗi sao từ số (5 → ★★★★★)
+        function getStarsString(rating) {
+            if (rating < 1 || rating > 5) return '☆☆☆☆☆';
+            return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        }
+        
+        // Tính tổng số sao và xác định mức G
+        function calculateTotalAndLevel() {
+            const total = Object.values(ratings).reduce((sum, rating) => sum + rating, 0);
+            
+            // Xác định mức G dựa trên tổng số sao
+            let gLevel;
+            if (total <= 5) {
+                gLevel = "G1";
+            } else if (total <= 9) {
+                gLevel = "G2";
+            } else if (total <= 12) {
+                gLevel = "G3";
+            } else {
+                gLevel = "G4";
+            }
+            
+            return { total, gLevel };
+        }
+        
+        // Cập nhật tổng số sao và mức G
+        function updateSummary() {
+            const { total, gLevel } = calculateTotalAndLevel();
+            
+            // Cập nhật trong form
+            document.getElementById('total-stars').textContent = total;
+            document.getElementById('g-level').textContent = gLevel;
+            
+            // Cập nhật trong preview
+            document.getElementById('preview-total-stars').textContent = total;
+            document.getElementById('preview-g-level').textContent = gLevel;
+        }
+        
+        // Tạo nhận xét cho năng lực cụ thể
+        function generateCommentForCompetency(competency, rating) {
+            if (!rating || rating < 1 || rating > 5) {
+                return "Vui lòng chọn mức sao trước khi gợi ý nhận xét.";
+            }
+            
+            const comments = commentBankByStars[rating][competency];
+            if (!comments || comments.length === 0) {
+                return `Học sinh ${competency === 'grammar' ? 'ngữ pháp' : competency === 'vocabulary' ? 'từ vựng' : 'giao tiếp'} ở mức trung bình.`;
+            }
+            
+            const selectedComments = getRandomItems(comments, 2);
+            return selectedComments.join(' ');
+        }
+        
+        // Tạo nhận xét chung
+        function generateGeneralComment() {
+            const { gLevel } = calculateTotalAndLevel();
+            const comments = generalLevelComments[gLevel];
+            
+            if (!comments || comments.length === 0) {
+                return `Học sinh có tiến bộ trong khóa học, cần tiếp tục duy trì và phát huy.`;
+            }
+            
+            const selectedComments = getRandomItems(comments, 3);
+            return selectedComments.join(' ');
+        }
+        
+        // Cập nhật preview
+        function updatePreview() {
+            // Thông tin học sinh
+            document.getElementById('preview-studentName').textContent = 
+                document.getElementById('studentName').value || '___________________';
+            document.getElementById('preview-className').textContent = 
+                document.getElementById('className').value || '___________________';
+            document.getElementById('preview-teacherName').textContent = 
+                document.getElementById('teacherName').value || '___________________';
+            document.getElementById('preview-teacherPhone').textContent = 
+                document.getElementById('teacherPhone').value || '___________________';
+            
+            // Năng lực
+            document.getElementById('preview-grammar-stars').textContent = getStarsString(ratings.grammar);
+            document.getElementById('preview-vocabulary-stars').textContent = getStarsString(ratings.vocabulary);
+            document.getElementById('preview-communication-stars').textContent = getStarsString(ratings.communication);
+            
+            document.getElementById('preview-grammar-comment').textContent = 
+                document.getElementById('grammar-comment').value || 'Chưa có nhận xét';
+            document.getElementById('preview-vocabulary-comment').textContent = 
+                document.getElementById('vocabulary-comment').value || 'Chưa có nhận xét';
+            document.getElementById('preview-communication-comment').textContent = 
+                document.getElementById('communication-comment').value || 'Chưa có nhận xét';
+            
+            // Nhận xét chung
+            document.getElementById('preview-general-comment').textContent = 
+                document.getElementById('general-comment').value || 'Chưa có nhận xét chung.';
+            
+            // Tổng kết
+            updateSummary();
+        }
+        
+        // Sao chép nội dung phiếu
+        function copyToClipboard() {
+            const studentName = document.getElementById('studentName').value || '___________________';
+            const className = document.getElementById('className').value || '___________________';
+            const teacherName = document.getElementById('teacherName').value || '___________________';
+            
+            const grammarStars = getStarsString(ratings.grammar);
+            const vocabularyStars = getStarsString(ratings.vocabulary);
+            const communicationStars = getStarsString(ratings.communication);
+            
+            const grammarComment = document.getElementById('grammar-comment').value || 'Chưa có nhận xét';
+            const vocabularyComment = document.getElementById('vocabulary-comment').value || 'Chưa có nhận xét';
+            const communicationComment = document.getElementById('communication-comment').value || 'Chưa có nhận xét';
+            
+            const generalComment = document.getElementById('general-comment').value || 'Chưa có nhận xét chung.';
+            
+            const { total, gLevel } = calculateTotalAndLevel();
+            
+            const text = `PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP
+
+Họ và tên học sinh: ${studentName}
+Lớp: ${className}
+Giáo viên: ${teacherName}
+
+ĐÁNH GIÁ NĂNG LỰC
+1. Grammar: ${grammarStars}
+   ${grammarComment}
+
+2. Vocabulary: ${vocabularyStars}
+   ${vocabularyComment}
+
+3. Communication: ${communicationStars}
+   ${communicationComment}
+
+Tổng sao: ${total} - Mức: ${gLevel}
+
+NHẬN XÉT CHUNG CỦA GIÁO VIÊN:
+${generalComment}
+
+Giáo viên ký tên:
+_________________________`;
+            
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showToast('Đã sao chép nội dung phiếu nhận xét!');
+                })
+                .catch(err => {
+                    console.error('Lỗi sao chép: ', err);
+                    showToast('Lỗi sao chép nội dung!', 'error');
+                });
+        }
+        
+        // Reset form
+        function resetForm() {
+            // Reset input fields
+            document.getElementById('studentName').value = '';
+            document.getElementById('className').value = '';
+            document.getElementById('teacherName').value = '';
+            document.getElementById('teacherPhone').value = '';
+            
+            // Reset ratings
+            ratings = { grammar: 0, vocabulary: 0, communication: 0 };
+            
+            // Reset star displays
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('active');
+            });
+            
+            // Reset comments
+            document.getElementById('grammar-comment').value = '';
+            document.getElementById('vocabulary-comment').value = '';
+            document.getElementById('communication-comment').value = '';
+            document.getElementById('general-comment').value = '';
+            
+            // Update preview
+            updatePreview();
+            
+            showToast('Đã làm mới phiếu nhận xét!');
+        }
+        
+        // ==================== SỰ KIỆN DOM ====================
+        
+        // Khởi tạo khi DOM sẵn sàng
+        document.addEventListener('DOMContentLoaded', function() {
+            // Xử lý sự kiện click sao
+            document.querySelectorAll('.star').forEach(star => {
+                star.addEventListener('click', function() {
+                    const competency = this.closest('.star-rating').dataset.competency;
+                    const value = parseInt(this.dataset.value);
+                    
+                    // Cập nhật rating
+                    ratings[competency] = value;
+                    
+                    // Cập nhật hiển thị sao cho năng lực này
+                    const stars = this.parentElement.querySelectorAll('.star');
+                    stars.forEach((s, index) => {
+                        if (index < value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                    
+                    // Cập nhật preview
+                    updatePreview();
+                });
+            });
+            
+            // Xử lý sự kiện gợi ý nhận xét cho từng năng lực
+            document.querySelectorAll('.suggest-btn').forEach(btn => {
+                if (btn.id !== 'suggest-general-btn') {
+                    btn.addEventListener('click', function() {
+                        const competency = this.dataset.competency;
+                        const rating = ratings[competency];
+                        
+                        if (!rating || rating < 1) {
+                            showToast(`Vui lòng chọn mức sao cho ${competency} trước!`, 'warning');
+                            return;
+                        }
+                        
+                        const comment = generateCommentForCompetency(competency, rating);
+                        document.getElementById(`${competency}-comment`).value = comment;
+                        
+                        // Cập nhật preview
+                        updatePreview();
+                        
+                        showToast(`Đã gợi ý nhận xét cho ${competency}!`);
+                    });
+                }
+            });
+            
+            // Xử lý sự kiện gợi ý nhận xét chung
+            document.getElementById('suggest-general-btn').addEventListener('click', function() {
+                const comment = generateGeneralComment();
+                document.getElementById('general-comment').value = comment;
+                
+                // Cập nhật preview
+                updatePreview();
+                
+                showToast('Đã gợi ý nhận xét chung!');
+            });
+            
+            // Xử lý sự kiện nút sao chép
+            document.getElementById('copy-btn').addEventListener('click', copyToClipboard);
+            
+            // Xử lý sự kiện nút làm mới
+            document.getElementById('reset-btn').addEventListener('click', resetForm);
+            
+            // Xử lý sự kiện nút in
+            document.getElementById('print-btn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Cập nhật preview khi nhập liệu
+            const inputs = [
+                'studentName', 'className', 'teacherName', 'teacherPhone',
+                'grammar-comment', 'vocabulary-comment', 'communication-comment',
+                'general-comment'
+            ];
+            
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('input', updatePreview);
+            });
+            
+            // Khởi tạo preview lần đầu
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
