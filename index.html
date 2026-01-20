@@ -655,10 +655,10 @@
             color: #666;
         }
 
-        /* Print styles - OPTIMIZED FOR SINGLE PAGE WITH BETTER SPACING */
+        /* Print styles - OPTIMIZED FOR SINGLE PAGE */
         @media print {
             @page {
-                margin: 0.2in 0.4in; /* Cân bằng margin */
+                margin: 0.15in 0.3in; /* Giảm margin để tiết kiệm không gian */
                 size: A4 portrait;
                 marks: none;
             }
@@ -666,17 +666,17 @@
             body {
                 background: white !important;
                 padding: 0 !important;
-                font-size: 10.5pt !important; /* Font size tối ưu */
+                font-size: 10pt !important; /* Giảm kích thước font */
                 margin: 0 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
                 font-family: 'Times New Roman', serif !important;
                 position: relative;
-                line-height: 1.35 !important; /* Line-height tốt hơn */
+                line-height: 1.3 !important; /* Giảm line-height */
             }
             
-            /* Header khi in - TỐI ƯU HÓA */
+            /* Header khi in - ĐÃ THU NHỎ */
             body::before {
                 content: "";
                 display: block;
@@ -684,20 +684,20 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 70px; /* Chiều cao hợp lý */
+                height: 60px; /* Giảm chiều cao header */
                 background-image: url('https://raw.githubusercontent.com/NewUniverse19/openland-assessment-auto/refs/heads/main/header.png');
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center top;
                 z-index: 9999;
                 background-color: white;
-                border-bottom: 1.5px solid #00695c;
+                border-bottom: 1px solid #00695c;
                 margin: 0;
                 padding: 0;
                 page-break-inside: avoid;
             }
             
-            /* Footer khi in - TỐI ƯU HÓA */
+            /* Footer khi in - ĐÃ THU NHỎ */
             body::after {
                 content: "";
                 display: block;
@@ -705,7 +705,7 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-                height: 50px; /* Chiều cao hợp lý */
+                height: 40px; /* Giảm chiều cao footer */
                 background-image: url('https://raw.githubusercontent.com/NewUniverse19/openland-assessment-auto/refs/heads/main/footer.png');
                 background-size: contain;
                 background-repeat: no-repeat;
@@ -732,8 +732,8 @@
                 display: block !important;
                 height: auto !important;
                 max-height: none !important;
-                margin-top: 80px !important; /* Margin-top hợp lý */
-                margin-bottom: 60px !important; /* Margin-bottom hợp lý */
+                margin-top: 70px !important; /* Giảm margin-top do header nhỏ hơn */
+                margin-bottom: 50px !important; /* Giảm margin-bottom do footer nhỏ hơn */
             }
             
             .preview-container {
@@ -748,17 +748,16 @@
                 background: white !important;
             }
             
-            /* Tiêu đề chính - CẢI THIỆN THẨM MỸ */
+            /* Thu nhỏ tiêu đề chính */
             .preview-title {
-                font-size: 14pt !important; /* Font size hợp lý */
-                margin-top: 10pt !important; /* Margin cân đối */
-                margin-bottom: 15pt !important; /* Margin cân đối */
+                font-size: 13pt !important; /* Giảm kích thước font */
+                margin-top: 5pt !important; /* Giảm margin */
+                margin-bottom: 10pt !important; /* Giảm margin */
                 color: #00695c !important;
-                border-bottom: 2pt solid #d1a200 !important; /* Border đẹp hơn */
+                border-bottom: 1.5pt solid #d1a200 !important; /* Giảm độ dày border */
                 text-align: center;
                 font-weight: bold;
-                padding-bottom: 8pt; /* Padding hợp lý */
-                letter-spacing: 0.5pt; /* Giãn chữ đẹp hơn */
+                padding-bottom: 5pt; /* Giảm padding */
             }
             
             .preview-title::after {
@@ -767,30 +766,27 @@
                 bottom: 0;
                 left: 30%;
                 width: 40%;
-                height: 1pt;
+                height: 0.5pt;
                 background: linear-gradient(90deg, transparent, #d1a200, transparent);
             }
             
-            /* Thông tin học sinh - CẢI THIỆN BỐ CỤC */
+            /* Thu nhỏ thông tin học sinh */
             .student-info {
-                font-size: 10pt !important; /* Font size hợp lý */
-                margin-bottom: 15pt !important; /* Margin cân đối */
-                border: 1.5pt solid #e0f2f1 !important; /* Border đẹp hơn */
+                font-size: 9.5pt !important; /* Giảm kích thước font */
+                margin-bottom: 10pt !important; /* Giảm margin */
+                border: 1pt solid #e0f2f1 !important; /* Giảm độ dày border */
                 background: #f8fdff !important;
-                padding: 12pt !important; /* Padding hợp lý */
-                border-radius: 6pt !important; /* Border-radius đẹp hơn */
+                padding: 8pt !important; /* Giảm padding */
+                border-radius: 4pt !important;
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 10pt !important; /* Gap hợp lý */
-                box-shadow: 0 2pt 4pt rgba(0, 129, 114, 0.1) !important;
+                gap: 8pt !important; /* Giảm gap */
+                box-shadow: 0 1pt 2pt rgba(0, 129, 114, 0.1) !important;
             }
             
             .student-info div {
-                padding: 3pt 0; /* Padding hợp lý */
-                border-bottom: 0.75pt dotted #e0e0e0; /* Border dotted đẹp hơn */
-                display: flex;
-                align-items: center;
-                min-height: 20pt;
+                padding: 2pt 0; /* Giảm padding */
+                border-bottom: 0.5pt dotted #e0e0e0; /* Giảm độ dày border */
             }
             
             .student-info div:last-child {
@@ -799,75 +795,66 @@
             
             .student-info strong {
                 color: #00695c;
-                min-width: 100pt; /* Min-width hợp lý */
+                min-width: 90pt; /* Giảm min-width */
                 display: inline-block;
-                font-size: 10pt; /* Font size đồng nhất */
-                margin-right: 8pt;
+                font-size: 9.5pt; /* Giảm kích thước font */
             }
             
-            /* Bảng - CẢI THIỆN BỐ CỤC */
+            /* Tối ưu hóa bảng */
             .preview-table {
-                font-size: 10pt !important; /* Font size hợp lý */
-                border: 1.5pt solid #e0f2f1 !important; /* Border đẹp hơn */
-                margin-bottom: 12pt !important; /* Margin cân đối */
-                border-radius: 6pt !important; /* Border-radius đẹp hơn */
+                font-size: 9.5pt !important; /* Giảm kích thước font */
+                border: 1pt solid #e0f2f1 !important; /* Giảm độ dày border */
+                margin-bottom: 8pt !important; /* Giảm margin */
+                border-radius: 4pt !important;
                 overflow: hidden;
-                box-shadow: 0 2pt 4pt rgba(0, 129, 114, 0.1) !important;
+                box-shadow: 0 1pt 2pt rgba(0, 129, 114, 0.1) !important;
                 page-break-inside: avoid !important;
             }
             
             .preview-table th {
                 background: linear-gradient(135deg, #00695c, #008172) !important;
                 color: white !important;
-                border-bottom: 2pt solid #004d40 !important; /* Border đậm hơn */
+                border-bottom: 1pt solid #004d40 !important; /* Giảm độ dày border */
                 font-weight: bold;
-                padding: 8pt 10pt !important; /* Padding hợp lý */
-                font-size: 10.5pt; /* Font size nhẹ nhàng */
-                letter-spacing: 0.3pt;
+                padding: 6pt 8pt !important; /* Giảm padding */
+                font-size: 10pt; /* Giảm kích thước font */
             }
             
             .preview-table td {
-                padding: 7pt 10pt !important; /* Padding hợp lý */
-                border-bottom: 0.75pt solid #e0f2f1 !important; /* Border mỏng hơn */
-                line-height: 1.3; /* Line-height tốt hơn */
-                vertical-align: middle;
+                padding: 5pt 8pt !important; /* Giảm padding */
+                border-bottom: 0.5pt solid #e0f2f1 !important; /* Giảm độ dày border */
+                line-height: 1.2; /* Giảm line-height */
             }
             
-            /* Điều chỉnh cột để tối ưu không gian */
+            /* Thu nhỏ cột để tiết kiệm không gian */
             .preview-table th:first-child,
             .preview-table td:first-child {
-                width: 32% !important; /* Chiều rộng hợp lý */
-                font-weight: 600;
+                width: 30% !important; /* Giảm chiều rộng */
             }
             
             .preview-table th:nth-child(2),
             .preview-table td:nth-child(2) {
-                width: 13% !important; /* Chiều rộng hợp lý */
+                width: 15% !important; /* Giảm chiều rộng */
                 text-align: center;
-                font-weight: bold;
             }
             
             .preview-table th:nth-child(3),
             .preview-table td:nth-child(3) {
-                width: 55% !important; /* Chiều rộng cho cột nhận xét */
+                width: 55% !important; /* Tăng chiều rộng cho cột nhận xét */
             }
             
             .preview-table tr:nth-child(even) {
                 background-color: #f8fdff !important;
             }
             
-            .preview-table tr:last-child td {
-                border-bottom: none !important;
-            }
-            
-            /* Phần đánh giá tổng quát - CẢI THIỆN */
+            /* Thu nhỏ phần đánh giá tổng quát */
             .preview-container > div:nth-last-child(3) {
                 background: linear-gradient(135deg, #f0f9f8, #fff9e6) !important;
-                border: 1.5pt solid #ffd54f !important; /* Border đẹp hơn */
-                border-radius: 6pt !important;
-                padding: 12pt !important; /* Padding hợp lý */
-                margin: 12pt 0 !important; /* Margin cân đối */
-                box-shadow: 0 2pt 4pt rgba(209, 162, 0, 0.15) !important;
+                border: 1pt solid #ffd54f !important; /* Giảm độ dày border */
+                border-radius: 4pt !important;
+                padding: 8pt !important; /* Giảm padding */
+                margin: 8pt 0 !important; /* Giảm margin */
+                box-shadow: 0 1pt 2pt rgba(209, 162, 0, 0.1) !important;
                 page-break-inside: avoid !important;
             }
             
@@ -877,130 +864,103 @@
                 align-items: center;
                 font-weight: bold;
                 color: #00695c;
-                margin-bottom: 8pt; /* Margin hợp lý */
-                font-size: 11pt; /* Font size hợp lý */
+                margin-bottom: 5pt; /* Giảm margin */
+                font-size: 10pt; /* Giảm kích thước font */
             }
             
             .preview-container > div:nth-last-child(3) span:last-child {
                 color: #d1a200;
                 background: white;
-                padding: 4pt 12pt; /* Padding hợp lý */
-                border-radius: 20pt;
-                border: 1pt solid #ffd54f; /* Border đẹp hơn */
+                padding: 3pt 10pt; /* Giảm padding */
+                border-radius: 15pt;
+                border: 0.5pt solid #ffd54f; /* Giảm độ dày border */
                 font-weight: bold;
-                font-size: 11pt; /* Font size hợp lý */
-                box-shadow: 0 1pt 3pt rgba(209, 162, 0, 0.2);
+                font-size: 10pt; /* Giảm kích thước font */
             }
             
-            /* Phần nhận xét chung - CẢI THIỆN */
+            /* Thu nhỏ phần nhận xét chung */
             .preview-container > div:nth-last-child(2) {
-                border: 1.5pt solid #e0f2f1 !important; /* Border đẹp hơn */
-                border-radius: 6pt !important;
-                padding: 12pt !important; /* Padding hợp lý */
-                margin: 12pt 0 18pt 0 !important; /* Margin cân đối */
+                border: 1pt solid #e0f2f1 !important; /* Giảm độ dày border */
+                border-radius: 4pt !important;
+                padding: 8pt !important; /* Giảm padding */
+                margin: 8pt 0 15pt 0 !important; /* Giảm margin */
                 background: white !important;
-                box-shadow: 0 2pt 4pt rgba(0, 129, 114, 0.1) !important;
+                box-shadow: 0 1pt 2pt rgba(0, 129, 114, 0.1) !important;
                 page-break-inside: avoid !important;
             }
             
             .preview-container > div:nth-last-child(2) h3 {
                 color: #00695c !important;
-                margin-bottom: 8pt !important; /* Margin hợp lý */
-                font-size: 11pt !important; /* Font size hợp lý */
-                border-bottom: 1pt solid #ffd54f; /* Border đẹp hơn */
-                padding-bottom: 6pt; /* Padding hợp lý */
+                margin-bottom: 6pt !important; /* Giảm margin */
+                font-size: 10pt !important; /* Giảm kích thước font */
+                border-bottom: 0.5pt solid #ffd54f; /* Giảm độ dày border */
+                padding-bottom: 4pt; /* Giảm padding */
                 font-weight: bold;
-                letter-spacing: 0.3pt;
             }
             
             .preview-container > div:nth-last-child(2) > div {
-                min-height: 60pt; /* Chiều cao tối thiểu hợp lý */
-                padding: 10pt; /* Padding hợp lý */
-                border: 1pt solid #e0f2f1; /* Border đẹp hơn */
-                border-radius: 4pt;
+                min-height: 50pt; /* Giảm chiều cao tối thiểu */
+                padding: 6pt; /* Giảm padding */
+                border: 0.5pt solid #e0f2f1; /* Giảm độ dày border */
+                border-radius: 3pt;
                 background: #f8fdff;
-                font-size: 10pt; /* Font size hợp lý */
-                line-height: 1.4; /* Line-height tốt hơn */
+                font-size: 9.5pt; /* Giảm kích thước font */
+                line-height: 1.3; /* Giảm line-height */
             }
             
-            /* Phần chữ ký - CẢI THIỆN ĐÁNG KỂ */
+            /* Thu nhỏ phần chữ ký */
             .teacher-signature {
                 text-align: right;
-                margin-top: 25pt !important; /* Margin hợp lý */
-                margin-bottom: 30pt !important; /* Margin hợp lý */
+                margin-top: 15pt !important; /* Giảm margin */
+                margin-bottom: 20pt !important; /* Giảm margin */
                 font-style: italic;
-                color: #555;
-                font-size: 10pt; /* Font size hợp lý */
-                padding-top: 15pt; /* Padding hợp lý */
-                border-top: 2pt dashed #d1a200; /* Border đẹp hơn */
+                color: #666;
+                font-size: 9.5pt; /* Giảm kích thước font */
+                padding-top: 10pt; /* Giảm padding */
+                border-top: 1pt dashed #d1a200; /* Giảm độ dày border */
                 page-break-inside: avoid !important;
                 position: relative;
-                padding-right: 20pt; /* Padding hợp lý */
+                padding-right: 15pt; /* Giảm padding */
             }
             
             .teacher-signature > div:first-child {
                 font-weight: bold;
-                font-size: 11pt; /* Font size hợp lý */
+                font-size: 10pt; /* Giảm kích thước font */
                 color: #00695c;
-                margin-bottom: 5pt; /* Margin hợp lý */
-                padding-right: 40pt; /* Padding hợp lý */
-                letter-spacing: 0.5pt;
+                margin-bottom: 3pt; /* Giảm margin */
+                padding-right: 30pt; /* Giảm padding */
             }
             
             .teacher-signature > div:last-child {
                 color: #00695c;
                 font-weight: bold;
-                font-size: 10.5pt; /* Font size hợp lý */
-                padding-right: 40pt; /* Padding hợp lý */
-                margin-top: 2pt;
+                font-size: 9.5pt; /* Giảm kích thước font */
+                padding-right: 30pt; /* Giảm padding */
             }
             
             /* Điều chỉnh sao đánh giá */
             .preview-table td:nth-child(2) {
                 color: #d1a200;
                 font-weight: bold;
-                font-size: 11pt; /* Font size hợp lý */
+                font-size: 10pt; /* Giảm kích thước font */
                 text-align: center;
-                letter-spacing: 1pt;
             }
             
             /* Giảm khoảng cách giữa các bảng */
             .preview-table + .preview-table {
-                margin-top: 2pt; /* Khoảng cách hợp lý */
+                margin-top: -5pt; /* Giảm khoảng cách giữa 2 bảng */
             }
             
             /* Đảm bảo không bị tràn trang */
             .preview-container {
-                max-height: calc(100vh - 140px) !important;
+                max-height: calc(100vh - 120px) !important; /* Đảm bảo không vượt quá chiều cao trang */
                 overflow: hidden !important;
             }
             
-            /* Tăng cường hiệu ứng in đẹp */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
-            }
-            
-            /* Thêm khoảng cách nhẹ cho các phần tử */
-            .preview-table td {
-                padding-top: 6pt !important;
-                padding-bottom: 6pt !important;
-            }
-            
-            /* Cải thiện độ đọc */
-            .preview-table td:nth-child(3) {
-                text-align: justify;
-                hyphens: auto;
-            }
-            
-            /* Tạo hiệu ứng phân tách nhẹ giữa các phần */
-            .preview-container > * {
-                margin-bottom: 12pt;
-            }
-            
-            .preview-container > *:last-child {
-                margin-bottom: 0;
             }
         }
 
