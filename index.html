@@ -15,8 +15,8 @@
             --secondary-color: #e8f5e9;
             --text-color: #2e3a4e;
             --border-color: #c5d9e8;
-            --shadow: 0 6px 12px rgba(0, 129, 114, 0.15);
-            --radius: 10px;
+            --shadow: 0 4px 12px rgba(0, 129, 114, 0.15);
+            --radius: 8px;
             --success-color: #4caf50;
             --warning-color: #ff9800;
             --error-color: #f44336;
@@ -30,87 +30,94 @@
 
         body {
             font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-color);
             background: linear-gradient(135deg, #f8fdff 0%, #e6f7f4 100%);
-            padding: 20px;
+            padding: 15px;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            max-height: 100vh;
+            overflow: hidden;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 129, 114, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(209, 162, 0, 0.05) 0%, transparent 20%);
-            z-index: -1;
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: var(--radius);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .app-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .app-title i {
+            color: var(--accent-light);
+        }
+
+        .student-manager {
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            max-width: 1500px;
-            margin: 0 auto;
+            gap: 15px;
+            height: calc(100vh - 100px);
+            max-height: calc(100vh - 100px);
+            overflow: hidden;
         }
 
         /* Form nhập liệu bên trái */
         .form-container {
             flex: 1;
-            min-width: 380px;
+            min-width: 350px;
             background-color: white;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 25px;
-            max-height: 95vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            max-height: 100%;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .form-content {
+            flex: 1;
             overflow-y: auto;
-            border-top: 5px solid var(--accent-color);
-            position: relative;
+            padding-right: 5px;
         }
 
-        .form-container::before {
-            content: "✏️";
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            background: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            border: 2px solid var(--accent-color);
+        .form-content::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .form-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .form-container::-webkit-scrollbar-track {
+        .form-content::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
-        .form-container::-webkit-scrollbar-thumb {
+        .form-content::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         h1 {
             color: var(--primary-color);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             text-align: center;
-            font-size: 1.7rem;
-            padding-bottom: 12px;
+            font-size: 1.4rem;
+            padding-bottom: 8px;
             position: relative;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         h1::after {
@@ -119,61 +126,47 @@
             bottom: 0;
             left: 30%;
             width: 40%;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
         }
 
         h2 {
             color: var(--primary-dark);
-            margin: 25px 0 18px 0;
-            font-size: 1.35rem;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e0f2f1;
+            margin: 15px 0 12px 0;
+            font-size: 1.2rem;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0f2f1;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         h2 i {
             color: var(--accent-color);
-            background: linear-gradient(45deg, var(--accent-color), #ffecb3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .form-group {
-            margin-bottom: 18px;
-            position: relative;
+            margin-bottom: 12px;
         }
 
-        .form-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-weight: 600;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
             color: var(--primary-dark);
-            font-size: 1rem;
-        }
-
-        .form-group label i {
-            color: var(--accent-color);
-            width: 20px;
-            text-align: center;
+            font-size: 0.9rem;
         }
 
         input[type="text"],
         textarea,
         select {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
             border-radius: var(--radius);
             font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            transition: all 0.2s;
             background-color: #fafafa;
         }
 
@@ -183,575 +176,496 @@
             outline: none;
             border-color: var(--accent-color);
             background-color: white;
-            box-shadow: 0 0 0 3px rgba(209, 162, 0, 0.2);
+            box-shadow: 0 0 0 2px rgba(209, 162, 0, 0.2);
         }
 
         .student-info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .competency-row {
             background: linear-gradient(to right, #f8fffe, #fffaf0);
             border-radius: var(--radius);
-            padding: 18px;
-            margin-bottom: 18px;
-            border-left: 5px solid var(--primary-color);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .competency-row::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .competency-row:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 129, 114, 0.2);
-        }
-
-        .competency-row:hover::before {
-            transform: translateX(100%);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s;
         }
 
         .competency-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .competency-name {
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             color: var(--primary-dark);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .competency-name i {
             color: var(--accent-color);
-            font-size: 1.2rem;
         }
 
         .star-display {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: var(--accent-color);
             font-weight: 600;
-            background: rgba(255, 213, 79, 0.1);
-            padding: 5px 10px;
-            border-radius: 20px;
-            border: 2px dashed var(--accent-light);
         }
 
         .star-rating {
             display: flex;
-            gap: 8px;
-            margin: 15px 0;
+            gap: 4px;
+            margin: 8px 0;
             justify-content: center;
         }
 
         .star {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #e0e0e0;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
+            transition: all 0.2s;
         }
 
         .star:hover {
-            transform: scale(1.3) rotate(10deg);
+            transform: scale(1.2);
         }
 
         .star.active {
             color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(209, 162, 0, 0.5);
         }
 
         .suggest-container {
-            margin: 15px 0;
+            margin: 10px 0;
             background-color: white;
             border-radius: var(--radius);
-            padding: 15px;
-            border: 2px solid var(--border-color);
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .suggest-container label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 0.95rem;
+            padding: 10px;
+            border: 1px solid var(--border-color);
         }
 
         .suggest-options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            max-height: 200px;
+            gap: 6px;
+            max-height: 150px;
             overflow-y: auto;
             padding-right: 5px;
         }
 
         .suggest-option {
-            padding: 10px 12px;
+            padding: 8px 10px;
             background-color: #f9f9f9;
-            border-radius: 6px;
+            border-radius: 4px;
             border: 1px solid #eee;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.95rem;
-            line-height: 1.4;
+            font-size: 0.85rem;
+            line-height: 1.3;
         }
 
         .suggest-option:hover {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             border-color: var(--primary-color);
-            transform: translateX(5px);
         }
 
         .custom-comment-container {
-            margin-top: 15px;
+            margin-top: 10px;
             display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .custom-comment-container.show {
             display: block;
         }
 
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+            max-height: 120px;
+        }
+
         .summary-box {
             background: linear-gradient(135deg, #f0f9f8, #fff9e6);
             border-radius: var(--radius);
-            padding: 20px;
-            margin-top: 20px;
-            border: 2px dashed var(--accent-color);
-            position: relative;
-        }
-
-        .summary-box::before {
-            content: "📊";
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            border: 2px solid var(--accent-color);
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px dashed var(--accent-color);
         }
 
         .summary-stats {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .g-level {
             color: var(--accent-color);
-            padding: 8px 20px;
-            background: linear-gradient(135deg, #fff9e6, #ffecb3);
-            border-radius: 25px;
-            border: 2px solid var(--accent-light);
-            font-weight: 700;
-            box-shadow: 0 4px 8px rgba(209, 162, 0, 0.2);
+            padding: 4px 12px;
+            background: #fff9e6;
+            border-radius: 20px;
+            border: 1px solid var(--accent-light);
         }
 
+        /* Student Tabs */
+        .student-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            flex-wrap: nowrap;
+            max-width: 100%;
+        }
+
+        .student-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .student-tabs::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .student-tabs::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .student-tab {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border-radius: var(--radius);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+            position: relative;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .student-tab:hover {
+            background: #e0e0e0;
+        }
+
+        .student-tab.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 6px rgba(0, 129, 114, 0.3);
+        }
+
+        .student-tab .close-tab {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .student-tab:hover .close-tab {
+            opacity: 1;
+        }
+
+        .student-tab.active .close-tab {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .add-student-btn {
+            padding: 8px 15px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .add-student-btn:hover {
+            background: #ff8f00;
+            transform: translateY(-1px);
+        }
+
+        /* Action buttons */
         .action-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
 
         .btn {
-            padding: 14px;
+            padding: 10px;
             border: none;
             border-radius: var(--radius);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            gap: 6px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
-            box-shadow: 0 4px 15px rgba(0, 129, 114, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 129, 114, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 129, 114, 0.3);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            background: #f0f0f0;
             color: var(--text-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background: #e0e0e0;
+            transform: translateY(-2px);
         }
 
         .btn-success {
             background: linear-gradient(135deg, var(--success-color), #388e3c);
             color: white;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
 
         .btn-success:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
         }
 
         .btn-warning {
             background: linear-gradient(135deg, var(--accent-color), #ff8f00);
             color: white;
-            box-shadow: 0 4px 15px rgba(209, 162, 0, 0.3);
         }
 
         .btn-warning:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(209, 162, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(209, 162, 0, 0.3);
         }
 
-        /* Khung xem trước bên phải */
+        /* Preview panel */
         .preview-container {
             flex: 1;
-            min-width: 380px;
+            min-width: 350px;
             background-color: white;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 25px;
-            height: fit-content;
-            max-height: 95vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            max-height: 100%;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .preview-content {
+            flex: 1;
             overflow-y: auto;
-            border-top: 5px solid var(--primary-color);
-            position: relative;
+            padding-right: 5px;
         }
 
-        .preview-container::before {
-            content: "📄";
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            background: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            border: 2px solid var(--primary-color);
+        .preview-content::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .preview-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .preview-container::-webkit-scrollbar-track {
+        .preview-content::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
-        .preview-container::-webkit-scrollbar-thumb {
+        .preview-content::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .preview-title {
             text-align: center;
-            font-size: 1.6rem;
-            font-weight: 800;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--primary-dark);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            position: relative;
-            padding-bottom: 15px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .preview-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
-        }
-
-        .preview-section {
-            margin-bottom: 20px;
-            position: relative;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0f2f1;
         }
 
         .student-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-            font-size: 1rem;
-            background: linear-gradient(135deg, #f0f9f8, #f8f5f0);
-            padding: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            background: #f9f9f9;
+            padding: 12px;
             border-radius: var(--radius);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
         }
 
         .preview-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
         }
 
         .preview-table th {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
-            padding: 14px 12px;
+            padding: 8px 10px;
             text-align: left;
             font-weight: 600;
             border-bottom: 2px solid var(--primary-dark);
-            position: relative;
-        }
-
-        .preview-table th:first-child {
-            border-top-left-radius: 6px;
-        }
-
-        .preview-table th:last-child {
-            border-top-right-radius: 6px;
         }
 
         .preview-table td {
-            padding: 12px;
+            padding: 8px 10px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: top;
-            background-color: white;
         }
 
-        .preview-table tr:nth-child(even) td {
+        .preview-table tr:nth-child(even) {
             background-color: #f9f9f9;
-        }
-
-        .preview-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .preview-table tr:last-child td:first-child {
-            border-bottom-left-radius: 6px;
-        }
-
-        .preview-table tr:last-child td:last-child {
-            border-bottom-right-radius: 6px;
         }
 
         .teacher-signature {
             text-align: right;
-            margin-top: 30px;
+            margin-top: 15px;
             font-style: italic;
-            color: var(--text-color);
-            font-size: 1rem;
-            padding-top: 25px;
-            border-top: 2px dashed var(--accent-color);
-            position: relative;
-        }
-
-        .teacher-signature::before {
-            content: "✍️";
-            position: absolute;
-            left: 0;
-            top: 25px;
-            font-size: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px dashed var(--accent-color);
         }
 
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: var(--radius);
-            box-shadow: 0 8px 25px rgba(0, 129, 114, 0.4);
+            box-shadow: 0 6px 16px rgba(0, 129, 114, 0.4);
             z-index: 1000;
             opacity: 0;
-            transform: translateY(20px) scale(0.9);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            font-size: 0.95rem;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 12px;
-            max-width: 350px;
-            border-left: 5px solid var(--accent-color);
+            gap: 10px;
+            max-width: 300px;
         }
 
         .toast.show {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
         .toast.error {
             background: linear-gradient(135deg, var(--error-color), #d32f2f);
-            border-left-color: #ffcdd2;
         }
 
         .toast.warning {
             background: linear-gradient(135deg, var(--warning-color), #f57c00);
-            border-left-color: var(--accent-light);
         }
 
-        .quick-templates {
-            margin: 20px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #fff9e6, #ffecb3);
-            border-radius: var(--radius);
-            border: 2px solid var(--accent-light);
-            position: relative;
-        }
-
-        .quick-templates h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .template-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
-        }
-
-        .template-btn {
-            padding: 12px;
-            background: white;
-            border: 2px solid var(--accent-color);
-            border-radius: 8px;
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .template-btn:hover {
-            background: linear-gradient(135deg, var(--accent-color), #ff8f00);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(209, 162, 0, 0.3);
-        }
-
-        .progress-indicator {
-            height: 8px;
-            background-color: #e0f2f1;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            width: 0%;
-            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill::after {
-            content: "";
-            position: absolute;
+        /* Modal for batch import */
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 2s infinite;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .modal.show {
+            display: flex;
         }
 
-        /* Graphics cho bản in */
-        .print-graphics {
-            display: none;
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
             .container {
                 flex-direction: column;
+                height: auto;
+                max-height: none;
             }
             
             .form-container,
             .preview-container {
-                max-height: none;
-                height: auto;
-                min-width: 100%;
+                max-height: 50vh;
             }
         }
 
@@ -761,28 +675,26 @@
                 grid-template-columns: 1fr;
             }
             
-            .action-buttons,
-            .template-buttons {
+            .action-buttons {
                 grid-template-columns: 1fr;
-            }
-            
-            .preview-title {
-                font-size: 1.3rem;
             }
             
             body {
                 padding: 10px;
             }
             
-            .toast {
-                left: 10px;
-                right: 10px;
-                max-width: none;
-                bottom: 20px;
+            .app-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            
+            .student-manager {
+                justify-content: center;
             }
         }
 
-        /* Print styles - Tối ưu với graphics */
+        /* Print styles */
         @media print {
             @page {
                 margin: 0.5in;
@@ -791,33 +703,30 @@
             }
             
             body {
-                background-color: white !important;
+                background: white !important;
                 padding: 0 !important;
-                font-size: 12pt !important;
+                font-size: 11pt !important;
                 margin: 0 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
-                font-family: 'Times New Roman', Georgia, serif !important;
+                font-family: 'Times New Roman', serif !important;
             }
             
-            body::before {
-                display: none !important;
-            }
-            
+            .app-header,
             .form-container,
             .action-buttons,
             .toast,
-            .quick-templates,
-            .progress-indicator,
-            .suggest-container,
-            .custom-comment-container,
-            .star-rating,
-            .suggest-btn,
-            .template-btn,
-            .btn,
-            .competency-row::before {
+            .student-tabs,
+            .add-student-btn,
+            .modal {
                 display: none !important;
+            }
+            
+            .container {
+                display: block !important;
+                height: auto !important;
+                max-height: none !important;
             }
             
             .preview-container {
@@ -825,485 +734,77 @@
                 padding: 0 !important;
                 margin: 0 !important;
                 width: 100% !important;
-                max-width: 100% !important;
-                min-width: 100% !important;
-                max-height: none !important;
-                overflow: visible !important;
                 border: none !important;
                 page-break-inside: avoid !important;
-                border-top: none !important;
-            }
-            
-            .preview-container::before {
-                display: none !important;
+                max-height: none !important;
             }
             
             .preview-title {
-                font-size: 22pt !important;
+                font-size: 14pt !important;
                 margin-top: 10pt !important;
-                margin-bottom: 25pt !important;
-                padding-bottom: 15pt !important;
-                color: var(--primary-dark) !important;
-                -webkit-text-fill-color: var(--primary-dark) !important;
-                text-align: center !important;
-                border-bottom: 3pt double var(--accent-color) !important;
-                position: relative !important;
-            }
-            
-            .preview-title::after {
-                display: none !important;
-            }
-            
-            .preview-title::before {
-                content: "🏆";
-                font-size: 28pt;
-                display: block;
-                margin-bottom: 10pt;
-                text-align: center;
+                color: #000 !important;
+                border-bottom: 2pt solid #000 !important;
             }
             
             .student-info {
-                font-size: 11pt !important;
-                margin-bottom: 20pt !important;
-                padding: 15pt !important;
-                border: 1pt solid var(--border-color) !important;
+                font-size: 10pt !important;
+                margin-bottom: 15pt !important;
+                border: 1pt solid #000 !important;
                 background: #f9f9f9 !important;
-                border-radius: 5pt !important;
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 10pt !important;
-            }
-            
-            .student-info::before {
-                content: "📋 Thông tin học sinh";
-                font-weight: bold;
-                font-size: 13pt;
-                color: var(--primary-dark);
-                grid-column: 1 / -1;
-                margin-bottom: 10pt;
-                padding-bottom: 5pt;
-                border-bottom: 1pt solid var(--accent-color);
             }
             
             .preview-table {
-                font-size: 10.5pt !important;
-                border: 1pt solid var(--border-color) !important;
-                page-break-inside: avoid !important;
-                margin-bottom: 20pt !important;
-                border-collapse: collapse !important;
+                font-size: 10pt !important;
+                border: 1pt solid #000 !important;
+                margin-bottom: 15pt !important;
             }
             
             .preview-table th {
-                background: var(--primary-color) !important;
-                color: white !important;
-                border-bottom: 2pt solid var(--primary-dark) !important;
-                padding: 10pt !important;
-                font-weight: bold !important;
-            }
-            
-            .preview-table td {
-                padding: 9pt !important;
-                border-bottom: 0.5pt solid var(--border-color) !important;
-                vertical-align: top !important;
-            }
-            
-            .preview-table tr:nth-child(even) td {
-                background-color: #f8f8f8 !important;
-            }
-            
-            /* Thêm graphics cho bản in */
-            .preview-section:nth-of-type(2)::before {
-                content: "📚 ĐÁNH GIÁ NĂNG LỰC";
-                display: block;
-                font-size: 14pt;
-                font-weight: bold;
-                color: var(--primary-dark);
-                margin-bottom: 10pt;
-                padding-bottom: 5pt;
-                border-bottom: 2pt solid var(--accent-color);
-                text-align: center;
-            }
-            
-            .preview-section:nth-of-type(3)::before {
-                content: "🌍 ĐÁNH GIÁ KỸ NĂNG TOÀN CẦU";
-                display: block;
-                font-size: 14pt;
-                font-weight: bold;
-                color: var(--primary-dark);
-                margin-bottom: 10pt;
-                padding-bottom: 5pt;
-                border-bottom: 2pt solid var(--accent-color);
-                text-align: center;
-            }
-            
-            .preview-section:nth-of-type(4)::before {
-                content: "💬 NHẬN XÉT CHUNG";
-                display: block;
-                font-size: 14pt;
-                font-weight: bold;
-                color: var(--primary-dark);
-                margin-bottom: 10pt;
-                padding-bottom: 5pt;
-                border-bottom: 2pt solid var(--accent-color);
-                text-align: center;
-            }
-            
-            #preview-general-comment {
-                min-height: 80pt !important;
-                padding: 15pt !important;
-                border: 1pt solid var(--border-color) !important;
-                border-radius: 5pt !important;
-                background: #f8f8f8 !important;
-                font-size: 11pt !important;
-                line-height: 1.5 !important;
-                margin-bottom: 20pt !important;
+                background: #f0f0f0 !important;
+                color: #000 !important;
+                border-bottom: 1pt solid #000 !important;
             }
             
             .teacher-signature {
-                margin-top: 40pt !important;
-                font-size: 11pt !important;
-                padding-top: 20pt !important;
-                border-top: 2pt dashed var(--accent-color) !important;
-                position: relative !important;
+                margin-top: 30pt !important;
+                font-size: 10pt !important;
             }
             
-            .teacher-signature::before {
-                content: "✍️ Ký tên giáo viên";
-                position: absolute !important;
-                left: 0 !important;
-                top: 20pt !important;
-                font-size: 1.5rem !important;
-                font-weight: bold !important;
-            }
-            
-            .teacher-signature div:last-child {
-                margin-top: 60pt !important;
-                font-size: 13pt !important;
-                font-weight: bold !important;
-            }
-            
-            /* Thêm footer cho bản in */
-            .preview-container::after {
-                content: "Phiếu nhận xét học sinh - Openland Education | " attr(data-print-date);
-                display: block;
-                text-align: center;
-                font-size: 9pt;
-                color: #666;
-                margin-top: 30pt;
-                padding-top: 10pt;
-                border-top: 0.5pt solid #ddd;
-                font-style: italic;
-            }
-            
-            /* Đảm bảo màu sắc in đúng */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
-            
-            /* Ẩn URL và ngày in */
-            @page {
-                @top-right { content: none !important; }
-                @bottom-left { content: none !important; }
-                @bottom-right { content: none !important; }
-                @bottom-center { content: none !important; }
-            }
-        }
-        
-        /* Fix cho các nút không phản hồi */
-        .btn:active,
-        .template-btn:active,
-        .suggest-option:active {
-            transform: scale(0.98) !important;
-        }
-        
-        .btn:disabled,
-        .template-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Header với quản lý học sinh -->
+    <div class="app-header">
+        <div class="app-title">
+            <i class="fas fa-chalkboard-teacher"></i>
+            CÔNG CỤ NHẬN XÉT HỌC SINH - OPENLAND
+        </div>
+        <div class="student-manager">
+            <div class="student-tabs" id="student-tabs">
+                <!-- Tabs sẽ được tạo động -->
+            </div>
+            <button class="add-student-btn" id="add-student-btn">
+                <i class="fas fa-plus"></i> Thêm học sinh
+            </button>
+            <button class="btn btn-warning" id="batch-import-btn" style="padding: 8px 12px;">
+                <i class="fas fa-file-import"></i> Nhập DS
+            </button>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Form nhập liệu bên trái -->
         <div class="form-container">
-            <h1><i class="fas fa-chalkboard-teacher"></i> CÔNG CỤ NHẬN XÉT HỌC SINH</h1>
-            
-            <!-- Thanh tiến độ -->
-            <div class="progress-indicator">
-                <div class="progress-fill" id="progress-fill"></div>
+            <div class="form-content" id="form-content">
+                <!-- Nội dung form sẽ được tạo động -->
             </div>
             
-            <!-- Thông tin học sinh -->
-            <h2><i class="fas fa-user-graduate"></i> THÔNG TIN HỌC SINH</h2>
-            <div class="form-group">
-                <label for="studentName"><i class="fas fa-user"></i> Họ và tên học sinh:</label>
-                <input type="text" id="studentName" placeholder="Nhập họ tên học sinh" required>
-                <div class="input-error" id="studentName-error" style="color: var(--error-color); font-size: 0.85rem; margin-top: 5px; display: none;">Vui lòng nhập tên học sinh</div>
-            </div>
-            
-            <div class="student-info-grid">
-                <div class="form-group">
-                    <label for="className"><i class="fas fa-school"></i> Lớp:</label>
-                    <input type="text" id="className" placeholder="Ví dụ: 10A1">
-                </div>
-                
-                <div class="form-group">
-                    <label for="teacherName"><i class="fas fa-chalkboard-teacher"></i> Giáo viên:</label>
-                    <input type="text" id="teacherName" placeholder="Nhập tên giáo viên" required>
-                    <div class="input-error" id="teacherName-error" style="color: var(--error-color); font-size: 0.85rem; margin-top: 5px; display: none;">Vui lòng nhập tên giáo viên</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="teacherPhone"><i class="fas fa-phone"></i> SĐT giáo viên:</label>
-                    <input type="text" id="teacherPhone" placeholder="Nhập số điện thoại">
-                </div>
-            </div>
-            
-            <!-- Mẫu nhanh -->
-            <div class="quick-templates">
-                <h3><i class="fas fa-bolt"></i> MẪU NHẬN XÉT NHANH</h3>
-                <div class="template-buttons">
-                    <button class="template-btn" data-template="excellent">
-                        <i class="fas fa-crown"></i> Xuất sắc
-                    </button>
-                    <button class="template-btn" data-template="good">
-                        <i class="fas fa-star"></i> Khá giỏi
-                    </button>
-                    <button class="template-btn" data-template="average">
-                        <i class="fas fa-chart-line"></i> Trung bình
-                    </button>
-                    <button class="template-btn" data-template="needs-improvement">
-                        <i class="fas fa-hand-point-up"></i> Cần cải thiện
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Đánh giá năng lực -->
-            <h2><i class="fas fa-star"></i> ĐÁNH GIÁ NĂNG LỰC</h2>
-            
-            <!-- Grammar -->
-            <div class="competency-row" id="grammar-row">
-                <div class="competency-header">
-                    <span class="competency-name"><i class="fas fa-book"></i> Grammar</span>
-                    <span class="star-display" id="grammar-star-display">☆☆☆☆☆</span>
-                </div>
-                <div class="star-rating" data-competency="grammar">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
-                </div>
-                
-                <div class="suggest-container">
-                    <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
-                    <div class="suggest-options" id="grammar-suggestions">
-                        <div class="suggest-option">Vui lòng chọn mức sao trước</div>
-                    </div>
-                    <button class="suggest-btn" data-competency="grammar" style="margin-top: 10px; width: 100%;">
-                        <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
-                    </button>
-                </div>
-                
-                <div class="custom-comment-container" id="grammar-custom-container">
-                    <label for="grammar-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
-                    <textarea id="grammar-comment" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Vocabulary -->
-            <div class="competency-row" id="vocabulary-row">
-                <div class="competency-header">
-                    <span class="competency-name"><i class="fas fa-book-open"></i> Vocabulary</span>
-                    <span class="star-display" id="vocabulary-star-display">☆☆☆☆☆</span>
-                </div>
-                <div class="star-rating" data-competency="vocabulary">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
-                </div>
-                
-                <div class="suggest-container">
-                    <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
-                    <div class="suggest-options" id="vocabulary-suggestions">
-                        <div class="suggest-option">Vui lòng chọn mức sao trước</div>
-                    </div>
-                    <button class="suggest-btn" data-competency="vocabulary" style="margin-top: 10px; width: 100%;">
-                        <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
-                    </button>
-                </div>
-                
-                <div class="custom-comment-container" id="vocabulary-custom-container">
-                    <label for="vocabulary-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
-                    <textarea id="vocabulary-comment" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Communication -->
-            <div class="competency-row" id="communication-row">
-                <div class="competency-header">
-                    <span class="competency-name"><i class="fas fa-comments"></i> Communication</span>
-                    <span class="star-display" id="communication-star-display">☆☆☆☆☆</span>
-                </div>
-                <div class="star-rating" data-competency="communication">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
-                </div>
-                
-                <div class="suggest-container">
-                    <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
-                    <div class="suggest-options" id="communication-suggestions">
-                        <div class="suggest-option">Vui lòng chọn mức sao trước</div>
-                    </div>
-                    <button class="suggest-btn" data-competency="communication" style="margin-top: 10px; width: 100%;">
-                        <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
-                    </button>
-                </div>
-                
-                <div class="custom-comment-container" id="communication-custom-container">
-                    <label for="communication-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
-                    <textarea id="communication-comment" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Đánh giá Global Skills -->
-            <h2><i class="fas fa-globe-americas"></i> ĐÁNH GIÁ KỸ NĂNG TOÀN CẦU</h2>
-            
-            <!-- Communication and Collaboration -->
-            <div class="competency-row" id="collaboration-row">
-                <div class="competency-header">
-                    <span class="competency-name"><i class="fas fa-users"></i> Communication and Collaboration</span>
-                    <span class="star-display" id="collaboration-star-display">☆☆☆☆☆</span>
-                </div>
-                <div class="star-rating" data-competency="collaboration">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
-                </div>
-                
-                <div class="suggest-container">
-                    <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
-                    <div class="suggest-options" id="collaboration-suggestions">
-                        <div class="suggest-option">Vui lòng chọn mức sao trước</div>
-                    </div>
-                    <button class="suggest-btn" data-competency="collaboration" style="margin-top: 10px; width: 100%;">
-                        <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
-                    </button>
-                </div>
-                
-                <div class="custom-comment-container" id="collaboration-custom-container">
-                    <label for="collaboration-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
-                    <textarea id="collaboration-comment" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Critical thinking and Problem solving -->
-            <div class="competency-row" id="critical-thinking-row">
-                <div class="competency-header">
-                    <span class="competency-name"><i class="fas fa-brain"></i> Critical thinking and Problem solving</span>
-                    <span class="star-display" id="critical-thinking-star-display">☆☆☆☆☆</span>
-                </div>
-                <div class="star-rating" data-competency="criticalThinking">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
-                </div>
-                
-                <div class="suggest-container">
-                    <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
-                    <div class="suggest-options" id="critical-thinking-suggestions">
-                        <div class="suggest-option">Vui lòng chọn mức sao trước</div>
-                    </div>
-                    <button class="suggest-btn" data-competency="criticalThinking" style="margin-top: 10px; width: 100%;">
-                        <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
-                    </button>
-                </div>
-                
-                <div class="custom-comment-container" id="critical-thinking-custom-container">
-                    <label for="critical-thinking-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
-                    <textarea id="critical-thinking-comment" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Global awareness and Digital literacy -->
-            <div class="competency-row" id="digital-literacy-row">
-                <div class="competency-header">
-                    <span class="competency-name"><i class="fas fa-laptop-code"></i> Global awareness and Digital literacy</span>
-                    <span class="star-display" id="digital-literacy-star-display">☆☆☆☆☆</span>
-                </div>
-                <div class="star-rating" data-competency="digitalLiteracy">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
-                </div>
-                
-                <div class="suggest-container">
-                    <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
-                    <div class="suggest-options" id="digital-literacy-suggestions">
-                        <div class="suggest-option">Vui lòng chọn mức sao trước</div>
-                    </div>
-                    <button class="suggest-btn" data-competency="digitalLiteracy" style="margin-top: 10px; width: 100%;">
-                        <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
-                    </button>
-                </div>
-                
-                <div class="custom-comment-container" id="digital-literacy-custom-container">
-                    <label for="digital-literacy-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
-                    <textarea id="digital-literacy-comment" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Tổng kết -->
-            <div class="summary-box">
-                <div class="summary-stats">
-                    <span style="color: var(--primary-dark);"><i class="fas fa-chart-bar"></i> Mức đánh giá:</span>
-                    <span class="g-level" id="g-level">G1</span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="general-comment"><i class="fas fa-edit"></i> NHẬN XÉT CHUNG CỦA GIÁO VIÊN:</label>
-                    <textarea id="general-comment" rows="4" placeholder="Nhận xét tổng quát về quá trình học tập và định hướng phát triển..."></textarea>
-                </div>
-                
-                <div class="suggest-container" style="margin-top: 15px;">
-                    <label><i class="fas fa-lightbulb"></i> Gợi ý nhận xét chung:</label>
-                    <div class="suggest-options" id="general-suggestions">
-                        <div class="suggest-option">Vui lòng đánh giá các mục trước</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Nút chức năng -->
             <div class="action-buttons">
                 <button class="btn btn-primary" id="reset-btn">
                     <i class="fas fa-redo"></i> Làm mới
@@ -1314,126 +815,44 @@
                 <button class="btn btn-secondary" id="print-btn">
                     <i class="fas fa-print"></i> In phiếu
                 </button>
-                <button class="btn btn-warning" id="save-template-btn">
-                    <i class="fas fa-save"></i> Lưu mẫu
-                </button>
-                <button class="btn btn-primary" id="export-pdf-btn">
-                    <i class="fas fa-file-pdf"></i> Xuất PDF
+                <button class="btn btn-primary" id="export-all-btn">
+                    <i class="fas fa-file-export"></i> Xuất tất cả
                 </button>
             </div>
         </div>
         
         <!-- Khung xem trước bên phải -->
-        <div class="preview-container" data-print-date="">
-            <div class="preview-title">PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP</div>
-            
-            <!-- Thông tin học sinh -->
-            <div class="preview-section">
-                <div class="student-info">
-                    <div>
-                        <strong>Họ và tên học sinh:</strong> 
-                        <span id="preview-studentName">___________________</span>
-                    </div>
-                    <div>
-                        <strong>Lớp:</strong> 
-                        <span id="preview-className">___________________</span>
-                    </div>
-                    <div>
-                        <strong>Giáo viên:</strong> 
-                        <span id="preview-teacherName">___________________</span>
-                    </div>
-                    <div>
-                        <strong>SĐT giáo viên:</strong> 
-                        <span id="preview-teacherPhone">___________________</span>
-                    </div>
-                </div>
+        <div class="preview-container">
+            <div class="preview-content" id="preview-content">
+                <!-- Nội dung preview sẽ được tạo động -->
             </div>
-            
-            <!-- Bảng đánh giá năng lực -->
-            <div class="preview-section">
-                <table class="preview-table">
-                    <thead>
-                        <tr>
-                            <th width="30%">Năng lực</th>
-                            <th width="15%">Mức đánh giá</th>
-                            <th>Nhận xét chi tiết</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Grammar</strong></td>
-                            <td id="preview-grammar-stars">☆☆☆☆☆</td>
-                            <td id="preview-grammar-comment">Chưa có nhận xét</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Vocabulary</strong></td>
-                            <td id="preview-vocabulary-stars">☆☆☆☆☆</td>
-                            <td id="preview-vocabulary-comment">Chưa có nhận xét</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Communication</strong></td>
-                            <td id="preview-communication-stars">☆☆☆☆☆</td>
-                            <td id="preview-communication-comment">Chưa có nhận xét</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+    </div>
+    
+    <!-- Modal nhập danh sách học sinh -->
+    <div class="modal" id="batch-import-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-users"></i> Nhập danh sách học sinh
+                </div>
+                <button class="modal-close" id="modal-close">&times;</button>
             </div>
-            
-            <!-- Bảng đánh giá Global Skills -->
-            <div class="preview-section">
-                <table class="preview-table">
-                    <thead>
-                        <tr>
-                            <th width="30%">Kỹ năng toàn cầu</th>
-                            <th width="15%">Mức đánh giá</th>
-                            <th>Nhận xét chi tiết</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Communication and Collaboration</strong></td>
-                            <td id="preview-collaboration-stars">☆☆☆☆☆</td>
-                            <td id="preview-collaboration-comment">Chưa có nhận xét</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Critical thinking and Problem solving</strong></td>
-                            <td id="preview-critical-thinking-stars">☆☆☆☆☆</td>
-                            <td id="preview-critical-thinking-comment">Chưa có nhận xét</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Global awareness and Digital literacy</strong></td>
-                            <td id="preview-digital-literacy-stars">☆☆☆☆☆</td>
-                            <td id="preview-digital-literacy-comment">Chưa có nhận xét</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div style="margin-top: 15px; padding: 12px; background: linear-gradient(135deg, #f0f9f8, #f8f5f0); border-radius: 8px; border: 1px solid var(--border-color);">
-                    <div style="display: flex; justify-content: space-between; font-weight: 600; color: var(--primary-dark);">
-                        <span><i class="fas fa-trophy" style="color: var(--accent-color);"></i> Mức đánh giá tổng quát:</span>
-                        <span id="preview-g-level" style="color: var(--accent-color); font-weight: 700;">G1</span>
-                    </div>
-                </div>
+            <div style="margin-bottom: 15px;">
+                <p>Nhập danh sách học sinh (mỗi học sinh trên một dòng):</p>
+                <textarea id="student-list-input" rows="10" placeholder="Ví dụ:
+Nguyễn Văn A
+Trần Thị B
+Lê Văn C
+..." style="width: 100%; margin-top: 10px;"></textarea>
             </div>
-            
-            <!-- Nhận xét chung -->
-            <div class="preview-section">
-                <div id="preview-general-comment" style="min-height: 100px; padding: 18px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; line-height: 1.6; background-color: #f9f9f9;">
-                    <div style="color: #666; font-style: italic; text-align: center; padding: 20px;">
-                        Nhận xét chung về quá trình học tập sẽ hiển thị tại đây...
-                    </div>
-                </div>
+            <div style="margin-bottom: 15px;">
+                <label>Lớp chung cho tất cả học sinh:</label>
+                <input type="text" id="batch-class-name" placeholder="Ví dụ: 10A1" style="width: 100%;">
             </div>
-            
-            <!-- Chữ ký -->
-            <div class="teacher-signature">
-                <div style="margin-top: 50px; font-weight: 700; font-size: 1.2rem;">_________________________</div>
-                <div style="margin-top: 10px; font-size: 1rem; color: var(--primary-dark);">
-                    <strong>GIÁO VIÊN KÝ TÊN</strong>
-                </div>
-                <div style="margin-top: 5px; font-size: 0.9rem; color: #666;">
-                    (Ký và ghi rõ họ tên)
-                </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn btn-secondary" id="modal-cancel">Hủy</button>
+                <button class="btn btn-success" id="modal-import">Nhập danh sách</button>
             </div>
         </div>
     </div>
@@ -1573,7 +992,7 @@
                 ],
                 digitalLiteracy: [
                     "Sử dụng thành thạo các công cụ học tập trực tuyến cơ bản.",
-                    "Có hiểu biết về vă hóa toàn cầu và công dân số.",
+                    "Có hiểu biết về văn hóa toàn cầu và công dân số.",
                     "Biết cách tìm kiếm và đánh giá thông tin trên internet.",
                     "Có khả năng sử dụng công nghệ để hỗ trợ học tập.",
                     "Nhận thức được tầm quan trọng của kỹ năng số trong thời đại 4.0."
@@ -1719,29 +1138,56 @@
                 "Sẵn sàng cho khóa tiếp theo ở trình độ cao hơn."
             ]
         };
+
+        // ==================== HỆ THỐNG QUẢN LÝ MULTI-STUDENT ====================
+        let students = [];
+        let currentStudentId = null;
         
-        // ==================== BIẾN TOÀN CỤC ====================
-        let ratings = {
-            grammar: 0,
-            vocabulary: 0,
-            communication: 0,
-            collaboration: 0,
-            criticalThinking: 0,
-            digitalLiteracy: 0
-        };
-        
-        let selectedComments = {
-            grammar: "",
-            vocabulary: "",
-            communication: "",
-            collaboration: "",
-            criticalThinking: "",
-            digitalLiteracy: "",
-            general: ""
-        };
-        
+        class Student {
+            constructor(id, name, className = "") {
+                this.id = id;
+                this.name = name;
+                this.className = className;
+                this.teacherName = "";
+                this.teacherPhone = "";
+                this.ratings = {
+                    grammar: 0,
+                    vocabulary: 0,
+                    communication: 0,
+                    collaboration: 0,
+                    criticalThinking: 0,
+                    digitalLiteracy: 0
+                };
+                this.comments = {
+                    grammar: "",
+                    vocabulary: "",
+                    communication: "",
+                    collaboration: "",
+                    criticalThinking: "",
+                    digitalLiteracy: "",
+                    general: ""
+                };
+                this.selectedComments = {
+                    grammar: "",
+                    vocabulary: "",
+                    communication: "",
+                    collaboration: "",
+                    criticalThinking: "",
+                    digitalLiteracy: "",
+                    general: ""
+                };
+            }
+            
+            calculateLevel() {
+                const total = Object.values(this.ratings).reduce((sum, rating) => sum + rating, 0);
+                if (total <= 10) return "G1";
+                if (total <= 18) return "G2";
+                if (total <= 24) return "G3";
+                return "G4";
+            }
+        }
+
         // ==================== HÀM TIỆN ÍCH ====================
-        
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
@@ -1764,751 +1210,265 @@
                 toast.classList.remove('error', 'warning');
             }, 3000);
         }
-        
+
         function getStarsString(rating) {
             if (rating < 1 || rating > 5) return '☆☆☆☆☆';
             return '★'.repeat(rating) + '☆'.repeat(5 - rating);
         }
-        
-        function calculateTotalAndLevel() {
-            const total = Object.values(ratings).reduce((sum, rating) => sum + rating, 0);
+
+        function generateStudentId() {
+            return 'student_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // ==================== QUẢN LÝ HỌC SINH ====================
+        function addStudent(name, className = "") {
+            const student = new Student(generateStudentId(), name, className);
+            students.push(student);
             
-            let gLevel;
-            if (total <= 10) {
-                gLevel = "G1";
-            } else if (total <= 18) {
-                gLevel = "G2";
-            } else if (total <= 24) {
-                gLevel = "G3";
-            } else {
-                gLevel = "G4";
+            if (students.length === 1) {
+                currentStudentId = student.id;
             }
             
-            return { total, gLevel };
+            updateStudentTabs();
+            renderFormForCurrentStudent();
+            renderPreviewForCurrentStudent();
+            
+            return student;
         }
-        
-        function updateSummary() {
-            const { gLevel } = calculateTotalAndLevel();
+
+        function removeStudent(studentId) {
+            if (students.length <= 1) {
+                showToast('Phải có ít nhất 1 học sinh', 'warning');
+                return;
+            }
             
-            document.getElementById('g-level').textContent = gLevel;
-            document.getElementById('preview-g-level').textContent = gLevel;
-            
-            updateProgressBar();
+            const index = students.findIndex(s => s.id === studentId);
+            if (index !== -1) {
+                students.splice(index, 1);
+                
+                if (currentStudentId === studentId) {
+                    currentStudentId = students[0]?.id || null;
+                }
+                
+                updateStudentTabs();
+                renderFormForCurrentStudent();
+                renderPreviewForCurrentStudent();
+                
+                showToast('Đã xóa học sinh');
+            }
         }
-        
-        function updateProgressBar() {
-            const totalFilled = Object.values(ratings).filter(r => r > 0).length;
-            const totalItems = Object.keys(ratings).length;
-            const progressPercent = (totalFilled / totalItems) * 100;
-            
-            document.getElementById('progress-fill').style.width = `${progressPercent}%`;
+
+        function switchStudent(studentId) {
+            currentStudentId = studentId;
+            updateStudentTabs();
+            renderFormForCurrentStudent();
+            renderPreviewForCurrentStudent();
         }
-        
-        function loadSuggestionsForCompetency(competency, rating) {
-            const suggestionsContainer = document.getElementById(`${competency}-suggestions`);
-            suggestionsContainer.innerHTML = '';
+
+        function updateStudentTabs() {
+            const tabsContainer = document.getElementById('student-tabs');
+            tabsContainer.innerHTML = '';
             
+            students.forEach(student => {
+                const tab = document.createElement('div');
+                tab.className = `student-tab ${student.id === currentStudentId ? 'active' : ''}`;
+                tab.textContent = student.name || `HS ${students.indexOf(student) + 1}`;
+                
+                const closeBtn = document.createElement('span');
+                closeBtn.className = 'close-tab';
+                closeBtn.innerHTML = '×';
+                closeBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    removeStudent(student.id);
+                };
+                
+                tab.appendChild(closeBtn);
+                tab.onclick = () => switchStudent(student.id);
+                
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        function getCurrentStudent() {
+            return students.find(s => s.id === currentStudentId) || students[0];
+        }
+
+        // ==================== RENDER FORM ====================
+        function renderFormForCurrentStudent() {
+            const formContent = document.getElementById('form-content');
+            const student = getCurrentStudent();
+            
+            if (!student) {
+                formContent.innerHTML = '<div style="text-align: center; padding: 20px;">Chưa có học sinh nào</div>';
+                return;
+            }
+            
+            formContent.innerHTML = `
+                <h1><i class="fas fa-edit"></i> NHẬP THÔNG TIN</h1>
+                
+                <div class="form-group">
+                    <label for="studentName"><i class="fas fa-user"></i> Họ và tên học sinh:</label>
+                    <input type="text" id="studentName" value="${student.name}" placeholder="Nhập họ tên học sinh">
+                </div>
+                
+                <div class="student-info-grid">
+                    <div class="form-group">
+                        <label for="className"><i class="fas fa-school"></i> Lớp:</label>
+                        <input type="text" id="className" value="${student.className}" placeholder="Ví dụ: 10A1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teacherName"><i class="fas fa-chalkboard-teacher"></i> Giáo viên:</label>
+                        <input type="text" id="teacherName" value="${student.teacherName}" placeholder="Nhập tên giáo viên">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teacherPhone"><i class="fas fa-phone"></i> SĐT giáo viên:</label>
+                        <input type="text" id="teacherPhone" value="${student.teacherPhone}" placeholder="Nhập số điện thoại">
+                    </div>
+                </div>
+                
+                <h2><i class="fas fa-star"></i> ĐÁNH GIÁ NĂNG LỰC</h2>
+                
+                ${renderCompetencyRow('grammar', 'Grammar', 'fas fa-book')}
+                ${renderCompetencyRow('vocabulary', 'Vocabulary', 'fas fa-book-open')}
+                ${renderCompetencyRow('communication', 'Communication', 'fas fa-comments')}
+                
+                <h2><i class="fas fa-globe-americas"></i> ĐÁNH GIÁ KỸ NĂNG TOÀN CẦU</h2>
+                
+                ${renderCompetencyRow('collaboration', 'Communication and Collaboration', 'fas fa-users')}
+                ${renderCompetencyRow('criticalThinking', 'Critical thinking and Problem solving', 'fas fa-brain')}
+                ${renderCompetencyRow('digitalLiteracy', 'Global awareness and Digital literacy', 'fas fa-laptop-code')}
+                
+                <div class="summary-box">
+                    <div class="summary-stats">
+                        <span><i class="fas fa-chart-bar"></i> Mức đánh giá:</span>
+                        <span class="g-level" id="g-level">${student.calculateLevel()}</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="general-comment"><i class="fas fa-edit"></i> NHẬN XÉT CHUNG:</label>
+                        <textarea id="general-comment" rows="3">${student.comments.general}</textarea>
+                    </div>
+                    
+                    <div class="suggest-container">
+                        <label><i class="fas fa-lightbulb"></i> Gợi ý nhận xét chung:</label>
+                        <div class="suggest-options" id="general-suggestions">
+                            ${renderGeneralSuggestions(student)}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            attachFormEvents();
+            updateStarDisplayForStudent(student);
+        }
+
+        function renderCompetencyRow(competency, displayName, icon) {
+            const student = getCurrentStudent();
+            const rating = student.ratings[competency] || 0;
+            
+            return `
+                <div class="competency-row" id="${competency}-row">
+                    <div class="competency-header">
+                        <span class="competency-name"><i class="${icon}"></i> ${displayName}</span>
+                        <span class="star-display" id="${competency}-star-display">${getStarsString(rating)}</span>
+                    </div>
+                    <div class="star-rating" data-competency="${competency}">
+                        ${[1,2,3,4,5].map(val => `
+                            <span class="star ${rating >= val ? 'active' : ''}" data-value="${val}">★</span>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="suggest-container">
+                        <label><i class="fas fa-lightbulb"></i> Chọn nhận xét mẫu:</label>
+                        <div class="suggest-options" id="${competency}-suggestions">
+                            ${renderSuggestionsForCompetency(competency, rating)}
+                        </div>
+                        <button class="btn btn-secondary" data-competency="${competency}" style="margin-top: 8px; width: 100%; padding: 8px; font-size: 0.85rem;">
+                            <i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh
+                        </button>
+                    </div>
+                    
+                    <div class="custom-comment-container" id="${competency}-custom-container">
+                        <label for="${competency}-comment"><i class="fas fa-edit"></i> Nhận xét tùy chỉnh:</label>
+                        <textarea id="${competency}-comment" rows="2">${student.comments[competency] || ''}</textarea>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSuggestionsForCompetency(competency, rating) {
             if (!rating || rating < 1) {
-                suggestionsContainer.innerHTML = '<div class="suggest-option">Vui lòng chọn mức sao trước</div>';
-                return;
+                return '<div class="suggest-option">Vui lòng chọn mức sao trước</div>';
             }
             
-            const comments = commentBankByStars[rating][competency] || [];
-            
+            const comments = commentBankByStars[rating]?.[competency] || [];
             if (comments.length === 0) {
-                suggestionsContainer.innerHTML = '<div class="suggest-option">Không có gợi ý cho mức này</div>';
-                return;
+                return '<div class="suggest-option">Không có gợi ý cho mức này</div>';
             }
             
-            comments.forEach((comment, index) => {
-                const option = document.createElement('div');
-                option.className = 'suggest-option';
-                option.textContent = comment;
-                option.dataset.index = index;
-                
-                option.addEventListener('click', function() {
-                    document.querySelectorAll(`#${competency}-suggestions .suggest-option`).forEach(opt => {
-                        opt.style.background = '';
-                        opt.style.color = '';
-                        opt.style.borderColor = '';
-                        opt.style.transform = '';
-                    });
-                    
-                    this.style.background = 'linear-gradient(135deg, var(--primary-color), var(--primary-dark))';
-                    this.style.color = 'white';
-                    this.style.borderColor = 'var(--primary-color)';
-                    this.style.transform = 'translateX(5px)';
-                    
-                    selectedComments[competency] = comment;
-                    
-                    const textareaId = competency === 'criticalThinking' ? 'critical-thinking-comment' : 
-                                      competency === 'digitalLiteracy' ? 'digital-literacy-comment' : 
-                                      `${competency}-comment`;
-                    const textarea = document.getElementById(textareaId);
-                    if (textarea) {
-                        textarea.value = comment;
-                        textarea.dispatchEvent(new Event('input'));
-                    }
-                });
-                
-                suggestionsContainer.appendChild(option);
-            });
+            const student = getCurrentStudent();
+            const selectedComment = student.selectedComments[competency];
+            
+            return comments.map((comment, index) => `
+                <div class="suggest-option ${selectedComment === comment ? 'selected' : ''}" 
+                     data-index="${index}"
+                     onclick="selectSuggestion('${competency}', ${index})">
+                    ${comment}
+                </div>
+            `).join('');
         }
-        
-        function loadGeneralSuggestions() {
-            const suggestionsContainer = document.getElementById('general-suggestions');
-            const { gLevel } = calculateTotalAndLevel();
-            
-            suggestionsContainer.innerHTML = '';
-            
+
+        function renderGeneralSuggestions(student) {
+            const gLevel = student.calculateLevel();
             const comments = generalLevelComments[gLevel] || [];
+            const selectedComment = student.selectedComments.general;
             
             if (comments.length === 0) {
-                suggestionsContainer.innerHTML = '<div class="suggest-option">Không có gợi ý cho mức này</div>';
-                return;
+                return '<div class="suggest-option">Không có gợi ý</div>';
             }
             
-            comments.forEach((comment, index) => {
-                const option = document.createElement('div');
-                option.className = 'suggest-option';
-                option.textContent = comment;
-                option.dataset.index = index;
-                
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('#general-suggestions .suggest-option').forEach(opt => {
-                        opt.style.background = '';
-                        opt.style.color = '';
-                        opt.style.borderColor = '';
-                        opt.style.transform = '';
-                    });
-                    
-                    this.style.background = 'linear-gradient(135deg, var(--primary-color), var(--primary-dark))';
-                    this.style.color = 'white';
-                    this.style.borderColor = 'var(--primary-color)';
-                    this.style.transform = 'translateX(5px)';
-                    
-                    selectedComments.general = comment;
-                    
-                    const textarea = document.getElementById('general-comment');
-                    if (textarea) {
-                        textarea.value = comment;
-                        textarea.dispatchEvent(new Event('input'));
-                    }
-                });
-                
-                suggestionsContainer.appendChild(option);
-            });
+            return comments.map((comment, index) => `
+                <div class="suggest-option ${selectedComment === comment ? 'selected' : ''}" 
+                     data-index="${index}"
+                     onclick="selectGeneralSuggestion(${index})">
+                    ${comment}
+                </div>
+            `).join('');
         }
-        
-        function updatePreview() {
-            const studentName = document.getElementById('studentName').value || '___________________';
-            const className = document.getElementById('className').value || '___________________';
-            const teacherName = document.getElementById('teacherName').value || '___________________';
-            const teacherPhone = document.getElementById('teacherPhone').value || '___________________';
-            
-            document.getElementById('preview-studentName').textContent = studentName;
-            document.getElementById('preview-className').textContent = className;
-            document.getElementById('preview-teacherName').textContent = teacherName;
-            document.getElementById('preview-teacherPhone').textContent = teacherPhone;
-            
-            document.getElementById('preview-grammar-stars').textContent = getStarsString(ratings.grammar);
-            document.getElementById('preview-vocabulary-stars').textContent = getStarsString(ratings.vocabulary);
-            document.getElementById('preview-communication-stars').textContent = getStarsString(ratings.communication);
-            document.getElementById('preview-collaboration-stars').textContent = getStarsString(ratings.collaboration);
-            document.getElementById('preview-critical-thinking-stars').textContent = getStarsString(ratings.criticalThinking);
-            document.getElementById('preview-digital-literacy-stars').textContent = getStarsString(ratings.digitalLiteracy);
-            
-            const grammarComment = document.getElementById('grammar-comment').value || 'Chưa có nhận xét';
-            const vocabularyComment = document.getElementById('vocabulary-comment').value || 'Chưa có nhận xét';
-            const communicationComment = document.getElementById('communication-comment').value || 'Chưa có nhận xét';
-            const collaborationComment = document.getElementById('collaboration-comment').value || 'Chưa có nhận xét';
-            const criticalThinkingComment = document.getElementById('critical-thinking-comment').value || 'Chưa có nhận xét';
-            const digitalLiteracyComment = document.getElementById('digital-literacy-comment').value || 'Chưa có nhận xét';
-            
-            document.getElementById('preview-grammar-comment').textContent = grammarComment;
-            document.getElementById('preview-vocabulary-comment').textContent = vocabularyComment;
-            document.getElementById('preview-communication-comment').textContent = communicationComment;
-            document.getElementById('preview-collaboration-comment').textContent = collaborationComment;
-            document.getElementById('preview-critical-thinking-comment').textContent = criticalThinkingComment;
-            document.getElementById('preview-digital-literacy-comment').textContent = digitalLiteracyComment;
-            
-            const generalComment = document.getElementById('general-comment').value || 'Chưa có nhận xét chung.';
-            document.getElementById('preview-general-comment').innerHTML = generalComment || 
-                '<div style="color: #666; font-style: italic; text-align: center; padding: 20px;">Nhận xét chung về quá trình học tập sẽ hiển thị tại đây...</div>';
-            
-            document.getElementById('grammar-star-display').textContent = getStarsString(ratings.grammar);
-            document.getElementById('vocabulary-star-display').textContent = getStarsString(ratings.vocabulary);
-            document.getElementById('communication-star-display').textContent = getStarsString(ratings.communication);
-            document.getElementById('collaboration-star-display').textContent = getStarsString(ratings.collaboration);
-            document.getElementById('critical-thinking-star-display').textContent = getStarsString(ratings.criticalThinking);
-            document.getElementById('digital-literacy-star-display').textContent = getStarsString(ratings.digitalLiteracy);
-            
-            updateSummary();
-            
-            if (generalComment.trim()) {
-                loadGeneralSuggestions();
-            }
-        }
-        
-        function validateForm() {
-            let isValid = true;
-            
-            const studentName = document.getElementById('studentName').value.trim();
-            const teacherName = document.getElementById('teacherName').value.trim();
-            
-            if (!studentName) {
-                document.getElementById('studentName-error').style.display = 'block';
-                document.getElementById('studentName').style.borderColor = 'var(--error-color)';
-                isValid = false;
-            } else {
-                document.getElementById('studentName-error').style.display = 'none';
-                document.getElementById('studentName').style.borderColor = '';
-            }
-            
-            if (!teacherName) {
-                document.getElementById('teacherName-error').style.display = 'block';
-                document.getElementById('teacherName').style.borderColor = 'var(--error-color)';
-                isValid = false;
-            } else {
-                document.getElementById('teacherName-error').style.display = 'none';
-                document.getElementById('teacherName').style.borderColor = '';
-            }
-            
-            return isValid;
-        }
-        
-        function copyToClipboard() {
-            if (!validateForm()) {
-                showToast('Vui lòng nhập đầy đủ thông tin bắt buộc', 'warning');
-                return;
-            }
-            
-            const studentName = document.getElementById('studentName').value || '___________________';
-            const className = document.getElementById('className').value || '___________________';
-            const teacherName = document.getElementById('teacherName').value || '___________________';
-            
-            const grammarStars = getStarsString(ratings.grammar);
-            const vocabularyStars = getStarsString(ratings.vocabulary);
-            const communicationStars = getStarsString(ratings.communication);
-            const collaborationStars = getStarsString(ratings.collaboration);
-            const criticalThinkingStars = getStarsString(ratings.criticalThinking);
-            const digitalLiteracyStars = getStarsString(ratings.digitalLiteracy);
-            
-            const grammarComment = document.getElementById('grammar-comment').value || 'Chưa có nhận xét';
-            const vocabularyComment = document.getElementById('vocabulary-comment').value || 'Chưa có nhận xét';
-            const communicationComment = document.getElementById('communication-comment').value || 'Chưa có nhận xét';
-            const collaborationComment = document.getElementById('collaboration-comment').value || 'Chưa có nhận xét';
-            const criticalThinkingComment = document.getElementById('critical-thinking-comment').value || 'Chưa có nhận xét';
-            const digitalLiteracyComment = document.getElementById('digital-literacy-comment').value || 'Chưa có nhận xét';
-            
-            const generalComment = document.getElementById('general-comment').value || 'Chưa có nhận xét chung.';
-            
-            const { gLevel } = calculateTotalAndLevel();
-            
-            const text = `PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP
 
-Họ và tên học sinh: ${studentName}
-Lớp: ${className}
-Giáo viên: ${teacherName}
-
-ĐÁNH GIÁ NĂNG LỰC
-1. Grammar: ${grammarStars}
-   ${grammarComment}
-
-2. Vocabulary: ${vocabularyStars}
-   ${vocabularyComment}
-
-3. Communication: ${communicationStars}
-   ${communicationComment}
-
-ĐÁNH GIÁ KỸ NĂNG TOÀN CẦU
-4. Communication and Collaboration: ${collaborationStars}
-   ${collaborationComment}
-
-5. Critical thinking and Problem solving: ${criticalThinkingStars}
-   ${criticalThinkingComment}
-
-6. Global awareness and Digital literacy: ${digitalLiteracyStars}
-   ${digitalLiteracyComment}
-
-Mức đánh giá tổng quát: ${gLevel}
-
-NHẬN XÉT CHUNG CỦA GIÁO VIÊN:
-${generalComment}
-
-Giáo viên ký tên:
-_________________________`;
+        // ==================== EVENT HANDLERS ====================
+        function attachFormEvents() {
+            const student = getCurrentStudent();
             
-            navigator.clipboard.writeText(text)
-                .then(() => {
-                    showToast('Đã sao chép nội dung phiếu nhận xét!');
-                })
-                .catch(err => {
-                    console.error('Lỗi sao chép: ', err);
-                    showToast('Lỗi sao chép nội dung!', 'error');
-                });
-        }
-        
-        function exportToPDF() {
-            if (!validateForm()) {
-                showToast('Vui lòng nhập đầy đủ thông tin bắt buộc', 'warning');
-                return;
-            }
-            
-            showToast('Đang chuẩn bị phiếu để in...', 'warning');
-            
-            const printWindow = window.open('', '_blank');
-            const today = new Date().toLocaleDateString('vi-VN');
-            document.querySelector('.preview-container').dataset.printDate = today;
-            
-            printWindow.document.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Phiếu Nhận Xét Học Sinh</title>
-                    <style>
-                        @page {
-                            margin: 0.5in;
-                            size: A4 portrait;
-                            marks: none;
-                        }
-                        body { 
-                            font-family: 'Times New Roman', Georgia, serif; 
-                            margin: 0; 
-                            padding: 20pt; 
-                            font-size: 12pt; 
-                            background: white;
-                            color: #2e3a4e;
-                        }
-                        .header { 
-                            text-align: center; 
-                            font-size: 18pt; 
-                            font-weight: bold; 
-                            margin-bottom: 25pt; 
-                            color: #008172;
-                            border-bottom: 3pt double #d1a200;
-                            padding-bottom: 10pt;
-                        }
-                        .header::before {
-                            content: "🏆";
-                            font-size: 24pt;
-                            display: block;
-                            margin-bottom: 10pt;
-                        }
-                        .student-info { 
-                            margin-bottom: 20pt; 
-                            padding: 15pt;
-                            border: 1pt solid #c5d9e8;
-                            border-radius: 5pt;
-                            background: #f9f9f9;
-                        }
-                        .student-info::before {
-                            content: "📋 Thông tin học sinh";
-                            font-weight: bold;
-                            font-size: 13pt;
-                            color: #008172;
-                            display: block;
-                            margin-bottom: 10pt;
-                            padding-bottom: 5pt;
-                            border-bottom: 1pt solid #d1a200;
-                        }
-                        .student-info div { 
-                            margin-bottom: 8pt; 
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            gap: 10pt;
-                        }
-                        table { 
-                            width: 100%; 
-                            border-collapse: collapse; 
-                            margin-bottom: 20pt; 
-                            border: 1pt solid #c5d9e8;
-                            page-break-inside: avoid;
-                        }
-                        th { 
-                            background: #008172; 
-                            color: white; 
-                            padding: 10pt; 
-                            border: 1pt solid #00695c;
-                            text-align: left; 
-                            font-weight: bold;
-                        }
-                        td { 
-                            padding: 9pt; 
-                            border: 0.5pt solid #c5d9e8; 
-                            vertical-align: top; 
-                        }
-                        tr:nth-child(even) td {
-                            background-color: #f8f8f8;
-                        }
-                        .section-title {
-                            font-size: 14pt;
-                            font-weight: bold;
-                            color: #008172;
-                            margin-bottom: 10pt;
-                            padding-bottom: 5pt;
-                            border-bottom: 2pt solid #d1a200;
-                            text-align: center;
-                            margin-top: 20pt;
-                        }
-                        .general-comment {
-                            min-height: 80pt;
-                            padding: 15pt;
-                            border: 1pt solid #c5d9e8;
-                            border-radius: 5pt;
-                            background: #f8f8f8;
-                            margin-bottom: 20pt;
-                            line-height: 1.5;
-                        }
-                        .signature { 
-                            text-align: right; 
-                            margin-top: 40pt; 
-                            padding-top: 20pt;
-                            border-top: 2pt dashed #d1a200;
-                            position: relative;
-                        }
-                        .signature::before {
-                            content: "✍️ Ký tên giáo viên";
-                            position: absolute;
-                            left: 0;
-                            top: 20pt;
-                            font-weight: bold;
-                        }
-                        .footer {
-                            text-align: center;
-                            font-size: 9pt;
-                            color: #666;
-                            margin-top: 30pt;
-                            padding-top: 10pt;
-                            border-top: 0.5pt solid #ddd;
-                            font-style: italic;
-                        }
-                        .level-badge {
-                            display: inline-block;
-                            padding: 5pt 15pt;
-                            background: #fff9e6;
-                            border: 2pt solid #ffd54f;
-                            border-radius: 20pt;
-                            font-weight: bold;
-                            color: #d1a200;
-                            margin-left: 10pt;
-                        }
-                        * {
-                            -webkit-print-color-adjust: exact !important;
-                            print-color-adjust: exact !important;
-                            color-adjust: exact !important;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP</div>
-                    
-                    <div class="student-info">
-                        <div>
-                            <span><strong>Họ và tên học sinh:</strong> ${document.getElementById('studentName').value || '___________________'}</span>
-                            <span><strong>Lớp:</strong> ${document.getElementById('className').value || '___________________'}</span>
-                        </div>
-                        <div>
-                            <span><strong>Giáo viên:</strong> ${document.getElementById('teacherName').value || '___________________'}</span>
-                            <span><strong>SĐT giáo viên:</strong> ${document.getElementById('teacherPhone').value || '___________________'}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section-title">📚 ĐÁNH GIÁ NĂNG LỰC</div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th width="30%">Năng lực</th>
-                                <th width="15%">Mức đánh giá</th>
-                                <th>Nhận xét chi tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Grammar</strong></td>
-                                <td>${getStarsString(ratings.grammar)}</td>
-                                <td>${document.getElementById('grammar-comment').value || 'Chưa có nhận xét'}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Vocabulary</strong></td>
-                                <td>${getStarsString(ratings.vocabulary)}</td>
-                                <td>${document.getElementById('vocabulary-comment').value || 'Chưa có nhận xét'}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Communication</strong></td>
-                                <td>${getStarsString(ratings.communication)}</td>
-                                <td>${document.getElementById('communication-comment').value || 'Chưa có nhận xét'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div class="section-title">🌍 ĐÁNH GIÁ KỸ NĂNG TOÀN CẦU</div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th width="30%">Kỹ năng toàn cầu</th>
-                                <th width="15%">Mức đánh giá</th>
-                                <th>Nhận xét chi tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Communication and Collaboration</strong></td>
-                                <td>${getStarsString(ratings.collaboration)}</td>
-                                <td>${document.getElementById('collaboration-comment').value || 'Chưa có nhận xét'}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Critical thinking and Problem solving</strong></td>
-                                <td>${getStarsString(ratings.criticalThinking)}</td>
-                                <td>${document.getElementById('critical-thinking-comment').value || 'Chưa có nhận xét'}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Global awareness and Digital literacy</strong></td>
-                                <td>${getStarsString(ratings.digitalLiteracy)}</td>
-                                <td>${document.getElementById('digital-literacy-comment').value || 'Chưa có nhận xét'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div style="padding: 12pt; background: #f0f9f8; border-radius: 5pt; border: 1pt solid #c5d9e8; margin-bottom: 20pt;">
-                        <div style="display: flex; justify-content: space-between; font-weight: bold; color: #008172;">
-                            <span>🏆 Mức đánh giá tổng quát:</span>
-                            <span class="level-badge">${document.getElementById('g-level').textContent}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section-title">💬 NHẬN XÉT CHUNG</div>
-                    <div class="general-comment">
-                        ${document.getElementById('general-comment').value || 'Chưa có nhận xét chung.'}
-                    </div>
-                    
-                    <div class="signature">
-                        <div style="margin-top: 60pt; font-weight: bold; font-size: 13pt;">_________________________</div>
-                        <div style="margin-top: 10pt; font-size: 11pt; color: #008172;">
-                            <strong>GIÁO VIÊN KÝ TÊN</strong>
-                        </div>
-                        <div style="margin-top: 5pt; font-size: 10pt; color: #666;">
-                            (Ký và ghi rõ họ tên)
-                        </div>
-                    </div>
-                    
-                    <div class="footer">
-                        Phiếu nhận xét học sinh - Openland Education | ${today}
-                    </div>
-                </body>
-                </html>
-            `);
-            
-            printWindow.document.close();
-            
-            setTimeout(() => {
-                printWindow.focus();
-                printWindow.print();
-                showToast('Phiếu đã sẵn sàng để in.', 'success');
-            }, 500);
-        }
-        
-        function saveTemplate() {
-            if (!validateForm()) {
-                showToast('Vui lòng nhập đầy đủ thông tin bắt buộc', 'warning');
-                return;
-            }
-            
-            const studentName = document.getElementById('studentName').value;
-            const template = {
-                studentName: studentName,
-                className: document.getElementById('className').value,
-                teacherName: document.getElementById('teacherName').value,
-                ratings: {...ratings},
-                comments: {
-                    grammar: document.getElementById('grammar-comment').value,
-                    vocabulary: document.getElementById('vocabulary-comment').value,
-                    communication: document.getElementById('communication-comment').value,
-                    collaboration: document.getElementById('collaboration-comment').value,
-                    criticalThinking: document.getElementById('critical-thinking-comment').value,
-                    digitalLiteracy: document.getElementById('digital-literacy-comment').value,
-                    general: document.getElementById('general-comment').value
-                },
-                timestamp: new Date().toLocaleString('vi-VN')
-            };
-            
-            const templates = JSON.parse(localStorage.getItem('commentTemplates') || '[]');
-            templates.push(template);
-            localStorage.setItem('commentTemplates', JSON.stringify(templates));
-            
-            showToast(`Đã lưu mẫu nhận xét cho ${studentName}`, 'success');
-        }
-        
-        function loadQuickTemplate(templateType) {
-            const templates = {
-                excellent: {
-                    ratings: { grammar: 5, vocabulary: 5, communication: 5, collaboration: 5, criticalThinking: 5, digitalLiteracy: 5 },
-                    comments: {
-                        grammar: "Nắm vững và vận dụng xuất sắc kiến thức đã học.",
-                        vocabulary: "Tiến bộ vượt bậc; phản xạ nhanh và chính xác.",
-                        communication: "Giao tiếp xuất sắc, tự tin và lưu loát.",
-                        collaboration: "Xuất sắc trong việc hợp tác và làm việc nhóm.",
-                        criticalThinking: "Có tư duy phản biện xuất sắc, luôn đặt câu hỏi sâu sắc.",
-                        digitalLiteracy: "Thành thạo trong việc sử dụng công nghệ để học tập và sáng tạo.",
-                        general: "Học sinh đạt kết quả xuất sắc và rất chủ động. Sẵn sàng cho khóa tiếp theo ở trình độ cao hơn."
-                    }
-                },
-                good: {
-                    ratings: { grammar: 4, vocabulary: 4, communication: 4, collaboration: 4, criticalThinking: 4, digitalLiteracy: 4 },
-                    comments: {
-                        grammar: "Nắm vững hầu hết nội dung và vận dụng khá linh hoạt.",
-                        vocabulary: "Tiến bộ rõ rệt; làm bài tốt và ổn định.",
-                        communication: "Giao tiếp tự nhiên hơn; phản xạ tốt trong hoạt động lớp.",
-                        collaboration: "Rất tích cực trong các hoạt động nhóm và hợp tác.",
-                        criticalThinking: "Có tư duy phân tích tốt, biết đặt câu hỏi sâu.",
-                        digitalLiteracy: "Sử dụng thành thạo công nghệ để học tập và nghiên cứu.",
-                        general: "Học sinh học tốt và có thái độ tích cực. Sẵn sàng học lên cấp độ tiếp theo."
-                    }
-                },
-                average: {
-                    ratings: { grammar: 3, vocabulary: 3, communication: 3, collaboration: 3, criticalThinking: 3, digitalLiteracy: 3 },
-                    comments: {
-                        grammar: "Đáp ứng yêu cầu cơ bản của khóa học.",
-                        vocabulary: "Nắm được kiến thức trọng tâm và áp dụng ở mức ổn định.",
-                        communication: "Tham gia học tập tương đối tích cực.",
-                        collaboration: "Tham gia tích cực vào các hoạt động nhóm.",
-                        criticalThinking: "Có khả năng phân tích vấn đề ở mức độ trung bình.",
-                        digitalLiteracy: "Sử dụng thành thạo các công cụ học tập trực tuyến cơ bản.",
-                        general: "Học sinh có tiến bộ, cần luyện thêm để ổn định kết quả. Tiếp tục cố gắng để đạt mức cao hơn."
-                    }
-                },
-                "needs-improvement": {
-                    ratings: { grammar: 2, vocabulary: 2, communication: 2, collaboration: 2, criticalThinking: 2, digitalLiteracy: 2 },
-                    comments: {
-                        grammar: "Có cố gắng nhưng kiến thức chưa vững; cần luyện thêm.",
-                        vocabulary: "Đã hiểu bài nhưng vận dụng chưa linh hoạt.",
-                        communication: "Cần luyện thêm dạng bài quen thuộc để giảm sai sót.",
-                        collaboration: "Đã bắt đầu tham gia vào hoạt động nhóm nhưng còn rụt rè.",
-                        criticalThinking: "Đã bắt đầu biết đặt câu hỏi về vấn đề được học.",
-                        digitalLiteracy: "Đã biết sử dụng cơ bản một số công cụ học tập trực tuyến.",
-                        general: "Cần củng cố nền tảng và ôn tập đều đặn hằng tuần. Khuyến nghị phụ huynh hỗ trợ lịch ôn tập tại nhà."
-                    }
-                }
-            };
-            
-            const template = templates[templateType];
-            if (!template) return;
-            
-            ratings = {...template.ratings};
-            
-            Object.keys(ratings).forEach(competency => {
-                const stars = document.querySelectorAll(`[data-competency="${competency}"] .star`);
-                const rating = ratings[competency];
-                
-                stars.forEach((star, index) => {
-                    if (index < rating) {
-                        star.classList.add('active');
-                    } else {
-                        star.classList.remove('active');
-                    }
-                });
-                
-                loadSuggestionsForCompetency(competency, rating);
+            // Input events
+            document.getElementById('studentName')?.addEventListener('input', (e) => {
+                student.name = e.target.value;
+                updateStudentTabs();
             });
             
-            Object.keys(template.comments).forEach(key => {
-                const textareaId = key === 'criticalThinking' ? 'critical-thinking-comment' : 
-                                  key === 'digitalLiteracy' ? 'digital-literacy-comment' : 
-                                  key === 'general' ? 'general-comment' : 
-                                  `${key}-comment`;
-                const textarea = document.getElementById(textareaId);
-                if (textarea) {
-                    textarea.value = template.comments[key];
-                    textarea.dispatchEvent(new Event('input'));
-                }
+            document.getElementById('className')?.addEventListener('input', (e) => {
+                student.className = e.target.value;
             });
             
-            loadGeneralSuggestions();
-            updatePreview();
-            
-            const templateNames = {
-                'excellent': 'Xuất sắc',
-                'good': 'Khá giỏi', 
-                'average': 'Trung bình',
-                'needs-improvement': 'Cần cải thiện'
-            };
-            
-            showToast(`Đã tải mẫu "${templateNames[templateType]}"`, 'success');
-        }
-        
-        function resetForm() {
-            document.getElementById('studentName').value = '';
-            document.getElementById('className').value = '';
-            document.getElementById('teacherName').value = '';
-            document.getElementById('teacherPhone').value = '';
-            
-            ratings = {
-                grammar: 0,
-                vocabulary: 0,
-                communication: 0,
-                collaboration: 0,
-                criticalThinking: 0,
-                digitalLiteracy: 0
-            };
-            
-            document.querySelectorAll('.star').forEach(star => {
-                star.classList.remove('active');
+            document.getElementById('teacherName')?.addEventListener('input', (e) => {
+                student.teacherName = e.target.value;
             });
             
-            const competencies = ['grammar', 'vocabulary', 'communication', 'collaboration', 'criticalThinking', 'digitalLiteracy'];
-            competencies.forEach(competency => {
-                const suggestionsContainer = document.getElementById(`${competency}-suggestions`);
-                if (suggestionsContainer) {
-                    suggestionsContainer.innerHTML = '<div class="suggest-option">Vui lòng chọn mức sao trước</div>';
-                }
+            document.getElementById('teacherPhone')?.addEventListener('input', (e) => {
+                student.teacherPhone = e.target.value;
             });
             
-            document.getElementById('general-suggestions').innerHTML = '<div class="suggest-option">Vui lòng đánh giá các mục trước</div>';
-            
-            document.getElementById('grammar-comment').value = '';
-            document.getElementById('vocabulary-comment').value = '';
-            document.getElementById('communication-comment').value = '';
-            document.getElementById('collaboration-comment').value = '';
-            document.getElementById('critical-thinking-comment').value = '';
-            document.getElementById('digital-literacy-comment').value = '';
-            document.getElementById('general-comment').value = '';
-            
-            document.querySelectorAll('.custom-comment-container').forEach(container => {
-                container.classList.remove('show');
-            });
-            
-            document.querySelectorAll('.suggest-btn[data-competency]').forEach(btn => {
-                btn.innerHTML = '<i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh';
-            });
-            
-            selectedComments = {
-                grammar: "",
-                vocabulary: "",
-                communication: "",
-                collaboration: "",
-                criticalThinking: "",
-                digitalLiteracy: "",
-                general: ""
-            };
-            
-            document.getElementById('studentName-error').style.display = 'none';
-            document.getElementById('teacherName-error').style.display = 'none';
-            document.getElementById('studentName').style.borderColor = '';
-            document.getElementById('teacherName').style.borderColor = '';
-            
-            updatePreview();
-            showToast('Đã làm mới phiếu nhận xét!');
-        }
-        
-        // ==================== SỰ KIỆN DOM ====================
-        document.addEventListener('DOMContentLoaded', function() {
+            // Star rating events
             document.querySelectorAll('.star').forEach(star => {
                 star.addEventListener('click', function() {
                     const competency = this.closest('.star-rating').dataset.competency;
                     const value = parseInt(this.dataset.value);
                     
-                    ratings[competency] = value;
+                    student.ratings[competency] = value;
                     
+                    // Update star display
                     const stars = this.parentElement.querySelectorAll('.star');
                     stars.forEach((s, index) => {
                         if (index < value) {
@@ -2518,77 +1478,404 @@ _________________________`;
                         }
                     });
                     
-                    loadSuggestionsForCompetency(competency, value);
-                    updatePreview();
+                    // Update star display text
+                    document.getElementById(`${competency}-star-display`).textContent = getStarsString(value);
+                    
+                    // Reload suggestions
+                    const suggestionsContainer = document.getElementById(`${competency}-suggestions`);
+                    if (suggestionsContainer) {
+                        suggestionsContainer.innerHTML = renderSuggestionsForCompetency(competency, value);
+                    }
+                    
+                    // Update level
+                    document.getElementById('g-level').textContent = student.calculateLevel();
+                    
+                    // Update general suggestions
+                    const generalSuggestions = document.getElementById('general-suggestions');
+                    if (generalSuggestions) {
+                        generalSuggestions.innerHTML = renderGeneralSuggestions(student);
+                    }
+                    
+                    renderPreviewForCurrentStudent();
                 });
             });
             
-            document.querySelectorAll('.suggest-btn[data-competency]').forEach(btn => {
+            // Comment input events
+            ['grammar', 'vocabulary', 'communication', 'collaboration', 'criticalThinking', 'digitalLiteracy'].forEach(competency => {
+                const textarea = document.getElementById(`${competency}-comment`);
+                if (textarea) {
+                    textarea.addEventListener('input', (e) => {
+                        student.comments[competency] = e.target.value;
+                        renderPreviewForCurrentStudent();
+                    });
+                }
+            });
+            
+            document.getElementById('general-comment')?.addEventListener('input', (e) => {
+                student.comments.general = e.target.value;
+                renderPreviewForCurrentStudent();
+            });
+            
+            // Custom comment button events
+            document.querySelectorAll('.btn[data-competency]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const competency = this.dataset.competency;
-                    const customContainer = document.getElementById(`${competency}-custom-container`);
+                    const container = document.getElementById(`${competency}-custom-container`);
                     
-                    if (customContainer.classList.contains('show')) {
-                        customContainer.classList.remove('show');
+                    if (container.classList.contains('show')) {
+                        container.classList.remove('show');
                         this.innerHTML = '<i class="fas fa-comment-medical"></i> Thêm nhận xét tùy chỉnh';
                     } else {
-                        customContainer.classList.add('show');
+                        container.classList.add('show');
                         this.innerHTML = '<i class="fas fa-times"></i> Đóng nhập tùy chỉnh';
                     }
                 });
             });
+        }
+
+        // Global functions for suggestions
+        window.selectSuggestion = function(competency, index) {
+            const student = getCurrentStudent();
+            const rating = student.ratings[competency];
+            const comments = commentBankByStars[rating]?.[competency] || [];
             
-            document.querySelectorAll('.template-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const templateType = this.dataset.template;
-                    loadQuickTemplate(templateType);
+            if (comments[index]) {
+                student.selectedComments[competency] = comments[index];
+                student.comments[competency] = comments[index];
+                
+                // Update textarea
+                const textarea = document.getElementById(`${competency}-comment`);
+                if (textarea) {
+                    textarea.value = comments[index];
+                }
+                
+                // Update suggestions display
+                const suggestionsContainer = document.getElementById(`${competency}-suggestions`);
+                if (suggestionsContainer) {
+                    suggestionsContainer.innerHTML = renderSuggestionsForCompetency(competency, rating);
+                }
+                
+                renderPreviewForCurrentStudent();
+            }
+        };
+
+        window.selectGeneralSuggestion = function(index) {
+            const student = getCurrentStudent();
+            const gLevel = student.calculateLevel();
+            const comments = generalLevelComments[gLevel] || [];
+            
+            if (comments[index]) {
+                student.selectedComments.general = comments[index];
+                student.comments.general = comments[index];
+                
+                // Update textarea
+                const textarea = document.getElementById('general-comment');
+                if (textarea) {
+                    textarea.value = comments[index];
+                }
+                
+                // Update suggestions display
+                const suggestionsContainer = document.getElementById('general-suggestions');
+                if (suggestionsContainer) {
+                    suggestionsContainer.innerHTML = renderGeneralSuggestions(student);
+                }
+                
+                renderPreviewForCurrentStudent();
+            }
+        };
+
+        function updateStarDisplayForStudent(student) {
+            ['grammar', 'vocabulary', 'communication', 'collaboration', 'criticalThinking', 'digitalLiteracy'].forEach(competency => {
+                const display = document.getElementById(`${competency}-star-display`);
+                if (display) {
+                    display.textContent = getStarsString(student.ratings[competency]);
+                }
+            });
+            
+            const gLevelDisplay = document.getElementById('g-level');
+            if (gLevelDisplay) {
+                gLevelDisplay.textContent = student.calculateLevel();
+            }
+        }
+
+        // ==================== RENDER PREVIEW ====================
+        function renderPreviewForCurrentStudent() {
+            const previewContent = document.getElementById('preview-content');
+            const student = getCurrentStudent();
+            
+            if (!student) {
+                previewContent.innerHTML = '<div style="text-align: center; padding: 20px;">Chưa có học sinh nào</div>';
+                return;
+            }
+            
+            previewContent.innerHTML = `
+                <div class="preview-title">PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP</div>
+                
+                <div class="student-info">
+                    <div>
+                        <strong>Họ và tên học sinh:</strong> 
+                        <span id="preview-studentName">${student.name || '___________________'}</span>
+                    </div>
+                    <div>
+                        <strong>Lớp:</strong> 
+                        <span id="preview-className">${student.className || '___________________'}</span>
+                    </div>
+                    <div>
+                        <strong>Giáo viên:</strong> 
+                        <span id="preview-teacherName">${student.teacherName || '___________________'}</span>
+                    </div>
+                    <div>
+                        <strong>SĐT giáo viên:</strong> 
+                        <span id="preview-teacherPhone">${student.teacherPhone || '___________________'}</span>
+                    </div>
+                </div>
+                
+                <table class="preview-table">
+                    <thead>
+                        <tr>
+                            <th width="35%">Năng lực</th>
+                            <th width="15%">Mức đánh giá</th>
+                            <th>Nhận xét chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${renderPreviewRow('grammar', 'Grammar')}
+                        ${renderPreviewRow('vocabulary', 'Vocabulary')}
+                        ${renderPreviewRow('communication', 'Communication')}
+                    </tbody>
+                </table>
+                
+                <table class="preview-table">
+                    <thead>
+                        <tr>
+                            <th width="35%">Kỹ năng toàn cầu</th>
+                            <th width="15%">Mức đánh giá</th>
+                            <th>Nhận xét chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${renderPreviewRow('collaboration', 'Communication and Collaboration')}
+                        ${renderPreviewRow('criticalThinking', 'Critical thinking and Problem solving')}
+                        ${renderPreviewRow('digitalLiteracy', 'Global awareness and Digital literacy')}
+                    </tbody>
+                </table>
+                
+                <div style="margin: 10px 0; padding: 10px; background: #f0f9f8; border-radius: var(--radius); border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; font-weight: 600; color: var(--primary-dark);">
+                        <span><i class="fas fa-trophy" style="color: var(--accent-color);"></i> Mức đánh giá tổng quát:</span>
+                        <span style="color: var(--accent-color);">${student.calculateLevel()}</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--primary-dark); margin-bottom: 8px; font-size: 1rem;">NHẬN XÉT CHUNG CỦA GIÁO VIÊN</h3>
+                    <div style="min-height: 80px; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius); background-color: #f9f9f9; font-size: 0.9rem; line-height: 1.5;">
+                        ${student.comments.general || 'Chưa có nhận xét chung.'}
+                    </div>
+                </div>
+                
+                <div class="teacher-signature">
+                    <div style="margin-top: 30px; font-weight: 700; font-size: 1rem;">_________________________</div>
+                    <div style="margin-top: 5px; font-size: 0.9rem; color: var(--primary-dark);">
+                        <strong>GIÁO VIÊN KÝ TÊN</strong>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPreviewRow(competency, displayName) {
+            const student = getCurrentStudent();
+            return `
+                <tr>
+                    <td><strong>${displayName}</strong></td>
+                    <td>${getStarsString(student.ratings[competency])}</td>
+                    <td>${student.comments[competency] || 'Chưa có nhận xét'}</td>
+                </tr>
+            `;
+        }
+
+        // ==================== BATCH IMPORT ====================
+        function showBatchImportModal() {
+            document.getElementById('batch-import-modal').classList.add('show');
+        }
+
+        function hideBatchImportModal() {
+            document.getElementById('batch-import-modal').classList.remove('show');
+            document.getElementById('student-list-input').value = '';
+            document.getElementById('batch-class-name').value = '';
+        }
+
+        function importStudentList() {
+            const input = document.getElementById('student-list-input').value.trim();
+            const className = document.getElementById('batch-class-name').value.trim();
+            
+            if (!input) {
+                showToast('Vui lòng nhập danh sách học sinh', 'warning');
+                return;
+            }
+            
+            const studentNames = input.split('\n')
+                .map(name => name.trim())
+                .filter(name => name.length > 0);
+            
+            if (studentNames.length === 0) {
+                showToast('Không tìm thấy tên học sinh hợp lệ', 'warning');
+                return;
+            }
+            
+            // Clear existing students
+            students = [];
+            currentStudentId = null;
+            
+            // Add new students
+            studentNames.forEach(name => {
+                addStudent(name, className);
+            });
+            
+            hideBatchImportModal();
+            showToast(`Đã nhập ${studentNames.length} học sinh`, 'success');
+        }
+
+        // ==================== EXPORT FUNCTIONS ====================
+        function copyCurrentToClipboard() {
+            const student = getCurrentStudent();
+            if (!student) {
+                showToast('Không có học sinh nào', 'warning');
+                return;
+            }
+            
+            const text = generateStudentReport(student);
+            
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showToast('Đã sao chép nhận xét!');
+                })
+                .catch(err => {
+                    console.error('Lỗi sao chép:', err);
+                    showToast('Lỗi sao chép!', 'error');
                 });
-            });
+        }
+
+        function exportAllStudents() {
+            if (students.length === 0) {
+                showToast('Không có học sinh nào', 'warning');
+                return;
+            }
             
-            document.getElementById('copy-btn').addEventListener('click', copyToClipboard);
-            document.getElementById('reset-btn').addEventListener('click', resetForm);
-            
-            document.getElementById('print-btn').addEventListener('click', function() {
-                if (!validateForm()) {
-                    showToast('Vui lòng nhập đầy đủ thông tin bắt buộc', 'warning');
-                    return;
-                }
-                
-                showToast('Đang chuẩn bị phiếu để in...', 'warning');
-                
-                setTimeout(() => {
-                    window.print();
-                }, 500);
-            });
-            
-            document.getElementById('save-template-btn').addEventListener('click', saveTemplate);
-            document.getElementById('export-pdf-btn').addEventListener('click', exportToPDF);
-            
-            const inputs = [
-                'studentName', 'className', 'teacherName', 'teacherPhone',
-                'grammar-comment', 'vocabulary-comment', 'communication-comment',
-                'collaboration-comment', 'critical-thinking-comment', 'digital-literacy-comment',
-                'general-comment'
-            ];
-            
-            inputs.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('input', updatePreview);
+            let allReports = '';
+            students.forEach((student, index) => {
+                allReports += generateStudentReport(student);
+                if (index < students.length - 1) {
+                    allReports += '\n' + '='.repeat(50) + '\n\n';
                 }
             });
             
-            const competencies = ['grammar', 'vocabulary', 'communication', 'collaboration', 'criticalThinking', 'digitalLiteracy'];
-            competencies.forEach(competency => {
-                loadSuggestionsForCompetency(competency, 0);
+            const blob = new Blob([allReports], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nhan_xet_hoc_sinh_${new Date().toISOString().slice(0,10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast(`Đã xuất ${students.length} học sinh`);
+        }
+
+        function generateStudentReport(student) {
+            return `PHIẾU NHẬN XÉT QUÁ TRÌNH HỌC TẬP
+
+Họ và tên học sinh: ${student.name || '___________________'}
+Lớp: ${student.className || '___________________'}
+Giáo viên: ${student.teacherName || '___________________'}
+
+ĐÁNH GIÁ NĂNG LỰC
+1. Grammar: ${getStarsString(student.ratings.grammar)}
+   ${student.comments.grammar || 'Chưa có nhận xét'}
+
+2. Vocabulary: ${getStarsString(student.ratings.vocabulary)}
+   ${student.comments.vocabulary || 'Chưa có nhận xét'}
+
+3. Communication: ${getStarsString(student.ratings.communication)}
+   ${student.comments.communication || 'Chưa có nhận xét'}
+
+ĐÁNH GIÁ KỸ NĂNG TOÀN CẦU
+4. Communication and Collaboration: ${getStarsString(student.ratings.collaboration)}
+   ${student.comments.collaboration || 'Chưa có nhận xét'}
+
+5. Critical thinking and Problem solving: ${getStarsString(student.ratings.criticalThinking)}
+   ${student.comments.criticalThinking || 'Chưa có nhận xét'}
+
+6. Global awareness and Digital literacy: ${getStarsString(student.ratings.digitalLiteracy)}
+   ${student.comments.digitalLiteracy || 'Chưa có nhận xét'}
+
+Mức đánh giá tổng quát: ${student.calculateLevel()}
+
+NHẬN XÉT CHUNG CỦA GIÁO VIÊN:
+${student.comments.general || 'Chưa có nhận xét chung.'}
+
+Giáo viên ký tên:
+_________________________`;
+        }
+
+        function resetCurrentStudent() {
+            const student = getCurrentStudent();
+            if (!student) return;
+            
+            // Reset ratings
+            Object.keys(student.ratings).forEach(key => {
+                student.ratings[key] = 0;
             });
             
-            loadGeneralSuggestions();
-            updatePreview();
+            // Reset comments
+            Object.keys(student.comments).forEach(key => {
+                student.comments[key] = '';
+            });
             
-            setTimeout(() => {
-                showToast('Chào mừng đến với công cụ nhận xét học sinh!', 'success');
-            }, 1000);
+            Object.keys(student.selectedComments).forEach(key => {
+                student.selectedComments[key] = '';
+            });
+            
+            // Reset basic info
+            student.teacherName = '';
+            student.teacherPhone = '';
+            
+            renderFormForCurrentStudent();
+            renderPreviewForCurrentStudent();
+            showToast('Đã làm mới thông tin học sinh');
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add first student
+            addStudent("Học sinh 1", "10A1");
+            
+            // Event listeners for buttons
+            document.getElementById('add-student-btn').addEventListener('click', () => {
+                const student = addStudent(`Học sinh ${students.length + 1}`);
+                switchStudent(student.id);
+                showToast('Đã thêm học sinh mới');
+            });
+            
+            document.getElementById('batch-import-btn').addEventListener('click', showBatchImportModal);
+            document.getElementById('modal-close').addEventListener('click', hideBatchImportModal);
+            document.getElementById('modal-cancel').addEventListener('click', hideBatchImportModal);
+            document.getElementById('modal-import').addEventListener('click', importStudentList);
+            
+            document.getElementById('reset-btn').addEventListener('click', resetCurrentStudent);
+            document.getElementById('copy-btn').addEventListener('click', copyCurrentToClipboard);
+            document.getElementById('print-btn').addEventListener('click', () => window.print());
+            document.getElementById('export-all-btn').addEventListener('click', exportAllStudents);
+            
+            // Close modal on outside click
+            document.getElementById('batch-import-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('batch-import-modal')) {
+                    hideBatchImportModal();
+                }
+            });
+            
+            showToast('Chào mừng đến với công cụ nhận xét học sinh!', 'success');
         });
     </script>
 </body>
